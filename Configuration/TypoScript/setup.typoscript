@@ -1,0 +1,21 @@
+plugin.tx_cysendmails {
+	view {
+		templateRootPaths {
+			0 = EXT:cy_send_mails/Resources/Private/Templates/
+			1 = {$plugin.tx_cysendmails.view.templateRootPath}
+		}
+
+		partialRootPaths {
+			0 = EXT:cy_send_mails/Resources/Private/Partials/
+			1 = {$plugin.tx_cysendmails.view.partialRootPath}
+		}
+
+		layoutRootPaths {
+			0 = EXT:cy_send_mails/Resources/Private/Layouts/
+			1 = {$plugin.tx_cysendmails.view.layoutRootPath}
+		}
+
+	}
+}
+
+lib.parseFunc.allowTags := addToList(s)

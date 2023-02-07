@@ -1,0 +1,30 @@
+{
+	"name" : "cylancer/sendMail",
+	"type" : "typo3-cms-extension",
+	"description" : "Send a message form fe users.",
+	"license" : "GPL-2.0-or-later",
+	"require" : {
+		"typo3/cms-core" : "^11.5"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Cylancer\\SendMail\\" : "Classes"
+		}
+	},
+	"authors" : [{
+			"name" : "Clemens Gogolin",
+			"email" : "service@cylancer.net",
+			"role" : "developer",
+			"homepage" : "https://github.com/docmcfly/sendMail"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/docmcfly/sendMail/issues",
+		"source" : "https://github.com/docmcfly/sendMail"
+	},
+	"extra" : {
+		"typo3/cms" : {
+			"extension-key" : "sendMail"
+		}
+	}
+}

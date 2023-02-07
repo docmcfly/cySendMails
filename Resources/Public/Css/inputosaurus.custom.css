@@ -1,0 +1,30 @@
+/**
+ *
+ * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * (c) 2023 C. Gogolin <service@cylancer.net>
+ *
+ */
+ .inputosaurus-container li.excludedPerson {
+	color: #a43919;
+	background-color: #e6bdb0;
+	border-color: #a43919;
+}
+
+.inputosaurus-container li.excludedPerson a {
+	color: #a43919;
+}
+
+
+.inputosaurus-container li.group {
+	color: #8c8e43;
+	background-color: #f9f06b;
+	border-color: #f5c211;
+}
+
+.inputosaurus-container li.group a {
+	color: #8c8e43;
+}

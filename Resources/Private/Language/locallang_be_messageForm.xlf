@@ -1,0 +1,70 @@
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext"
+		original="messages" 
+		product-name="cylancer sendMessage">
+		<header />
+		<body>
+		
+			<!--  GLOBAL -->
+			<trans-unit id="plugin.name">
+				<source>Send a message (form and send function)</source>
+			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>With this plugin the frontend users can send other frontend users a email.</source>
+			</trans-unit>
+		
+		
+			<!--  FLEXFORMS -->
+			<trans-unit id="flexforms_general.title">
+				<source>Send a message</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.saveMessages">
+				<source>Save the messages</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.saveMessages.none">
+				<source>None</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.saveMessages.minimal">
+				<source>Minimal saving</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.saveMessages.full">
+				<source>Full saving</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.senderName">
+				<source>Sender name</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.noReplySenderEmail">
+				<source>Email address for "no reply"</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.subjectPrefix">
+				<source>Subject prefix</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.maxAttachmentsSize">
+				<source>Max attachments size</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.formHeader">
+				<source>Form header text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.formFooter">
+				<source>Form footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.successfulSendHeader">
+				<source>Successful send - header text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.successfulSendFooter">
+				<source>Successful send - footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.failedSendHeader">
+				<source>Error during sending - header text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.failedSendFooter">
+				<source>Error during sending - footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.emailFooter">
+				<source>Email footer text</source>
+			</trans-unit>
+		
+
+		</body>
+	</file>
+</xliff>
