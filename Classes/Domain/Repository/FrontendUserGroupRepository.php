@@ -1,5 +1,5 @@
 <?php
-namespace Cylancer\SendMessage\Domain\Repository;
+namespace Cylancer\CySendMails\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
 

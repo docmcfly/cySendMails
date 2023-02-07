@@ -25,8 +25,8 @@ call_user_func(function () {
                 elements {
                     messageform {
                         iconIdentifier = cysendmails-plugin-messageform
-                        title = LLL:EXT:send_message/Resources/Private/Language/locallang_be_messageForm.xlf:plugin.name
-                        description = LLL:EXT:send_message/Resources/Private/Language/locallang_be_messageForm.xlf:plugin.description
+                        title = LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:plugin.name
+                        description = LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:plugin.description
                         tt_content_defValues {
                             CType = list
                             list_type = cysendmails_messageform
@@ -39,7 +39,7 @@ call_user_func(function () {
     
     $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon('cysendmails-plugin-messageform', SvgIconProvider::class, [
-        'source' => 'EXT:send_message/Resources/Public/Icons/plugin_messageForm.svg'
+        'source' => 'EXT:cy_send_mails/Resources/Public/Icons/plugin_messageForm.svg'
     ]);
     
     

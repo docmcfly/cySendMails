@@ -11,7 +11,6 @@ use Cylancer\CySendMails\Domain\Model\FrontendUserGroup;
 use Cylancer\CySendMails\Domain\Model\FrontendUser;
 use Cylancer\CySendMails\Service\EmailSendService;
 use Cylancer\CySendMails\Service\FrontendUserService;
-use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Session\UserSession;
 use TYPO3\CMS\Core\Session\UserSessionManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -128,7 +127,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         asort($receivers);
         
-        debug($receivers);
+    //     debug($receivers);
         
         $this->view->assign('message', $msg);
         $this->view->assign('receivers', implode(',', $receivers));

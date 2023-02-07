@@ -1,7 +1,7 @@
 #
-# Table structure for table 'tx_cysendmessage_domain_model_message' 
-#
-CREATE TABLE tx_cysendmessage_domain_model_message (
+# Table structure for table 'tx_cysendmails_domain_model_message' 
+#                            
+CREATE TABLE tx_cysendmails_domain_model_message (
    sender int (11) UNSIGNED DEFAULT '0' NOT NULL,
    receivers MEDIUMTEXT,
    subject TEXT,
@@ -10,9 +10,9 @@ CREATE TABLE tx_cysendmessage_domain_model_message (
 );
 
 #
-# Table structure for table 'tx_cysendmessage_fegroups_receivergroup_mm' 
+# Table structure for table 'tx_cysendmails_fegroups_receivergroup_mm' 
 #
-CREATE TABLE tx_cysendmessage_fegroups_receivergroup_mm (
+CREATE TABLE tx_cysendmails_fegroups_receivergroup_mm (
    
    uid_local int (11) UNSIGNED DEFAULT '0' NOT NULL,
    uid_foreign int (11) UNSIGNED DEFAULT '0' NOT NULL,

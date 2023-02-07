@@ -1,12 +1,11 @@
 <?php
-namespace Cylancer\SendMessage\Domain\Repository;
+namespace Cylancer\CySendMails\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use Cylancer\SendMessage\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-
+ 
 /**
  *
  * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
@@ -17,8 +16,7 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
  * (c) 2023 C. Gogolin <service@cylancer.net>
  *
  * @package Cylancer\CySendMails\Domain\Repository
- *         
- */
+ */         
 class FrontendUserRepository extends Repository
 {
 

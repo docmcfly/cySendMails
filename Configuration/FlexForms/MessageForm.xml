@@ -53,7 +53,8 @@
 							<label>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_general.settings.settings.noReplySenderName
 							</label>
 							<config>
-								<type>email</type>
+								<type>input</type>
+								<eval>required, email</eval>
 							</config>
 						</TCEforms>
 					</settings.noReplySenderName>

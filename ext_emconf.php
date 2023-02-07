@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'You can send mails to other frontend users without knowing your email address',
-    'description' => 'You can send mails to other frontend users without knowing your email address',
+    'title' => 'Send a mail to other frontend user or frontend user groups.',
+    'description' => 'LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:plugin.description',
     'category' => 'plugin',
     'author' => 'C. Gogolin',
     'author_email' => 'service@cylancer.net',
@@ -20,7 +20,7 @@ $EM_CONF[$_EXTKEY] = [
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '1.1.0',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.12-11.5.99',

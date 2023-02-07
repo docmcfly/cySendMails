@@ -3,9 +3,7 @@ declare(strict_types = 1);
 namespace Cylancer\CySendMails\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-
+ 
 /**
  *
  * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
