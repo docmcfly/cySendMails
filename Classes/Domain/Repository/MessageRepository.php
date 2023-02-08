@@ -2,6 +2,9 @@
 namespace Cylancer\CySendMails\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  *
@@ -17,4 +20,16 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class MessageRepository extends Repository
 {
+
+    /**
+     *
+     * @param array $storagePageIds
+     */
+    public function setStorageUids(array $storagePageIds):void{
+        /** @var QuerySettingsInterface $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setStoragePageIds($storagePageIds);
+        $this->setDefaultQuerySettings($querySettings);
+    }
+    
 }

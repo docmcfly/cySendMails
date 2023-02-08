@@ -172,6 +172,43 @@
 							</config>
 						</TCEforms>
 					</settings.emailFooter>
+					<settings.frontendUserStorageUids>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_general.settings.frontendUserStorageUids
+							</label>
+							<config>
+								<type>select</type>
+								<renderType>selectTree</renderType>
+								<foreign_table>pages</foreign_table>
+								<foreign_table_where>ORDER BY pages.sorting</foreign_table_where>
+								<size>20</size>
+								<treeConfig>
+									<parentField>pid</parentField>
+								</treeConfig>
+								<minitems>1</minitems>
+							</config>
+						</TCEforms>
+					</settings.frontendUserStorageUids>
+					<settings.messagesStorageUid>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_general.settings.messagesStorageUid
+							</label>
+							<config>
+								<type>select</type>
+								<renderType>selectTree</renderType>
+								<foreign_table>pages</foreign_table>
+								<foreign_table_where>ORDER BY pages.sorting</foreign_table_where>
+								<size>20</size>
+								<treeConfig>
+									<parentField>pid</parentField>
+								</treeConfig>
+								<minitems>1</minitems>
+								<maxitems>1</maxitems>
+							</config>
+						</TCEforms>
+					</settings.messagesStorageUid>
 					<!-- end of settings -->
 
 				</el>

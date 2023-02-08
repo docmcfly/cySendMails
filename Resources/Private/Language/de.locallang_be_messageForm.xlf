@@ -82,6 +82,15 @@
 				<source>Email footer text</source>
 				<target state="tanslated">E-Mail-Fußtext</target>
 			</trans-unit>
+			<trans-unit id="flexforms_general.settings.frontendUserStorageUids">
+				<source>Storages of frontend users</source>
+				<target state="tanslated">Speicherort der Webseitennutzer:innen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.messagesStorageUid">
+				<source>Storage for delivered messages</source>
+				<target state="tanslated">Speicherort der zugestellten Nachrichten</target>
+			</trans-unit>
+			
 		
 
 		</body>

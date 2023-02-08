@@ -37,6 +37,18 @@ class FrontendUserService implements SingletonInterface
 
     /**
      *
+     * @param array $storagePageIds
+     */
+    public function setStorageUids(array $storagePageIds):void{
+        /** @var QuerySettingsInterface $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setStoragePageIds($storagePageIds);
+        $this->setDefaultQuerySettings($querySettings);
+    }
+    
+    
+    /**
+     *
      * @return FrontendUser Returns the current frontend user
      */
     public function getCurrentUser(): ?FrontendUser

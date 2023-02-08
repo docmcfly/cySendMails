@@ -5,6 +5,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  
 /**
  *
@@ -33,6 +35,17 @@ class FrontendUserRepository extends Repository
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
     }
 
+    /**
+     * 
+     * @param array $storagePageIds
+     */
+    public function setStorageUids(array $storagePageIds):void{
+        /** @var QuerySettingsInterface $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $querySettings->setStoragePageIds($storagePageIds);
+        $this->setDefaultQuerySettings($querySettings);
+    }
+    
     /**
      *
      * @param array<Integer> $frontendUserGroupUid

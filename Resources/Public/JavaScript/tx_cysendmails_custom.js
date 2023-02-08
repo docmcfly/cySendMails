@@ -28,7 +28,7 @@ $('#receivers').inputosaurus({
 	inputDelimiters: [','],
 	classHook: function(val) {
 		let value = $.trim(val)
-		return value.startsWith('#') ? 'group' : (value.startWith('-') ? 'excludedPerson' : 'person'
+		return value.startsWith('#') ? 'group' : (value.startsWith('-') ? 'excludedPerson' : 'person')
 	}
 });
 

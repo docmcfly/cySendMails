@@ -63,6 +63,12 @@
 			<trans-unit id="flexforms_general.settings.emailFooter">
 				<source>Email footer text</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.settings.frontendUserStorageUids">
+				<source>Storages of frontend users</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.settings.messagesStorageUid">
+				<source>Storage for delivered messages</source>
+			</trans-unit>
 		
 
 		</body>
