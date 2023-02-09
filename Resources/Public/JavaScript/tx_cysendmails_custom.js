@@ -40,19 +40,11 @@ $('#resetButton').click(function() {
 
 $(document).ready(
 	function() {
-		$(".tx_sendMessage button[type=submit]").each(function() {
-			$(this).mouseup(function() {
+		$("#sendButton").mouseup(function() {
 				$(this).prop('disabled', true)
+				$("#resetButton").prop('disabled', true)
 				$('#waitMessageContainer').append('<div class="waitMessage" >Nachricht wird geprüft und versandt... ⌛</div>')
-/*		  		setTimeout(function(){
-								$(".tx_sendMessage button[type=submit]").each(function() {
-									$(this).prop('disabled', false)
-									$('.waitMessage').remove()
-							});
-				},
-				 45000)*/
 				$(this).parent('form').submit()
-			})
 		});
 	});
 

@@ -42,7 +42,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     const GROUP_MARKER = '#';
 
-    const EXCLUDE_MARKER = '-';
+    const EXCLUDE_MARKER = '- ';
 
     const VALIDATION_RESULTS_KEY = 'validationResults';
 
@@ -62,6 +62,12 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     /**  @var EmailSendService      */
     private $emailSendService;
+
+    /** @var array */
+    private $allowedReceivers;
+
+    /** @var array */
+    private $allowedReceiverGroups;
 
     /**
      *
@@ -84,31 +90,24 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->frontendUserRepository->setStorageUids(GeneralUtility::intExplode(',', $this->settings[MessageFormController::FRONTEND_USER_STORAGE_UIDS]));
         $this->messageRepository->setStorageUids(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID]));
         $this->frontendUserService = new FrontendUserService($this->frontendUserRepository);
-    }
-
-    private function getAllowedReceivers()
-    {
 
         /** @var FrontendUser $frontendUser  */
-        return array_filter($this->frontendUserRepository->findAll()->toArray(), //
+        $this->allowedReceivers = array_filter($this->frontendUserRepository->findAll()->toArray(), //
         function ($frontendUser) {
             return ! empty($frontendUser->getEmail());
         });
-    }
+        // debug($this->allowedReceivers);
 
-    private function getAllowedReceiverGroups()
-    {
-        /** @var FrontendUserGroup $frontendUserGroup  */
-        /** @var FrontendUserGroup $receiverGroup  */
-        $return = [];
+        $tmp = [];
         foreach ($this->frontendUserService->getAllGroups($this->frontendUserService->getCurrentUser()) as $frontendUserGroup) {
             foreach ($frontendUserGroup->getReceiverGroup() as $receiverGroup) {
                 if (! empty($receiverGroup->getReceiverGroupName())) {
-                    $return[$receiverGroup->getUid()] = $receiverGroup;
+                    $tmp[$receiverGroup->getUid()] = $receiverGroup;
                 }
             }
         }
-        return array_values($return);
+        $this->allowedReceiverGroups = array_values($tmp);
+        // debug($this->allowedReceiverGroups);
     }
 
     public function showAction(): void
@@ -128,16 +127,16 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         array_map(function ($frontendUser) {
             return "'" . $frontendUser->getName() . "'";
-        }, $this->getAllowedReceivers()), //
+        }, $this->allowedReceivers), //
         array_map(function ($frontendUserGroup) {
             return ! empty($frontendUserGroup->getReceiverGroupName()) ? ("'" . MessageFormController::GROUP_MARKER . $frontendUserGroup->getReceiverGroupName() . "'") : '';
-        }, $this->getAllowedReceiverGroups()));
+        }, $this->allowedReceiverGroups));
 
         asort($receivers);
 
         $excludedReceivers = array_map(function ($frontendUser) {
             return "'" . MessageFormController::EXCLUDE_MARKER . $frontendUser->getName() . "'";
-        }, $this->getAllowedReceivers()); //
+        }, $this->allowedReceivers); //
         asort($excludedReceivers);
 
         $receivers = array_merge($receivers, $excludedReceivers);
@@ -149,41 +148,67 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->view->assign('header', $this->settings['formHeader']);
     }
 
+    private function getValidReceiverGroup(String $name): ?FrontendUserGroup
+    {
+        /** @var FrontendUserGroup $frontendUserGroup  */
+        foreach ($this->allowedReceiverGroups as $frontendUserGroup) {
+            if ($frontendUserGroup->getReceiverGroupName() === $name) {
+                return $frontendUserGroup;
+            }
+        }
+        return null;
+    }
+
+    private function getValidReceiver(String $name): ?FrontendUser
+    {
+        /** @var FrontendUser $frontendUser  */
+        foreach ($this->allowedReceivers as $frontendUser) {
+            if ($frontendUser->getName() === $name) {
+                return $frontendUser;
+            }
+        }
+        return null;
+    }
+
     public function sendAction(Message $message)
     {
 
         /** @var FrontendUser $frontendUser  */
         /** @var FrontendUserGroup $frontendUserGroup  */
-        $allowedReceiverUids = array_map(function ($frontendUser) {
-            return $frontendUser->getUid();
-        }, $this->getAllowedReceivers());
-        $allowedReceiverGroupUids = array_map(function ($frontendUserGroup) {
-            return $frontendUserGroup->getUid();
-        }, $this->getAllowedReceiverGroups());
 
         // Preparing :: idetifier the receivers:
         $receiversSource = explode(',', $message->getReceivers());
         $receiverGroups = [];
         $receivers = [];
+        $excludedReceivers = [];
 
         $wrongReceiverGroups = [];
         $wrongReceivers = [];
 
-        // collect all receivers
+        // collect the receiver, the receiver groups and the excluded receivers
+        
         /** @var array $tmp  */
         foreach ($receiversSource as $receiver) {
             $receiver = trim($receiver);
             if (substr($receiver, 0, 1) === MessageFormController::GROUP_MARKER) {
-                $tmp = $this->frontendUserGroupRepository->findByReceiverGroupName(substr($receiver, 1));
-                if (count($tmp) == 1 && in_array($tmp[0]->getUid(), $allowedReceiverGroupUids)) {
-                    $receiverGroups[] = $tmp[0];
+                $tmp = $this->getValidReceiverGroup(substr($receiver, 1));
+                if ($tmp != null) {
+                    $receiverGroups[] = $tmp;
                 } else {
                     $wrongReceiverGroups[] = substr($receiver, 1);
                 }
-            } else if (substr($receiver, 0, 1) !== MessageFormController::EXCLUDE_MARKER) {
-                $tmp = $this->frontendUserRepository->findByName($receiver);
-                if (count($tmp) == 1 && in_array($tmp[0]->getUid(), $allowedReceiverUids)) {
-                    $tmp = $tmp[0];
+            } else if (substr($receiver, 0, 2) === MessageFormController::EXCLUDE_MARKER) {
+                $tmp = $this->getValidReceiver(substr($receiver, 2));
+                if ($tmp != null) {
+                    $excludedReceivers[$tmp->getUid()] = $tmp;
+                } else {
+                    if (! empty(trim($receiver))) {
+                        $wrongReceivers[] = $receiver;
+                    }
+                }
+            } else if (substr($receiver, 0, 2) !== MessageFormController::EXCLUDE_MARKER) {
+                $tmp = $this->getValidReceiver($receiver);
+                if ($tmp != null) {
                     $receivers[$tmp->getUid()] = $tmp;
                 } else {
                     if (! empty(trim($receiver))) {
@@ -192,26 +217,9 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 }
             }
         }
-
-        // Removes the excluded recipients
-        /** @var array $tmp  */
-        foreach ($receiversSource as $receiver) {
-            $receiver = trim($receiver);
-            if (substr($receiver, 0, 1) === MessageFormController::EXCLUDE_MARKER) {
-                $tmp = $this->frontendUserRepository->findByName($receiver);
-                if (count($tmp) == 1 && in_array($tmp[0]->getUid(), $allowedReceiverUids)) {
-                    $tmp = $tmp[0];
-                    unset($receivers[$tmp->getUid()]);
-                } else {
-                    if (! empty(trim($receiver))) {
-                        $wrongReceivers[] = $receiver;
-                    }
-                }
-            }
-        }
-
+       
         /** @var ValidationResults $validationResults */
-        $validationResults = $this->validate($message, $wrongReceivers, $wrongReceiverGroups, $wrongAttachments);
+        $validationResults = $this->validate($message, $wrongReceivers, $wrongReceiverGroups);
         if (! $validationResults->hasErrors()) {
 
             /** @var FrontendUserGroup $frontendUserGroup  */
@@ -229,6 +237,12 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                         }
                     }
                 }
+            }
+            
+            // removes the excluded receivers
+            /** @var int $uid */
+            foreach (array_keys($excludedReceivers) as $uid) {
+                unset($receivers[$uid]);
             }
 
             /** @var FrontendUser $currentFrontendUser  */

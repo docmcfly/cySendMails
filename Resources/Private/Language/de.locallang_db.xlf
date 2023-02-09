@@ -2,7 +2,7 @@
 <xliff version="1.0">
 	<file source-language="en" datatype="plaintext"
 		original="messages" 
-		product-name="cylancer sendMessage">
+		product-name="cylancer cySendMails">
 		<header />
 		<body>
 			<!--  GLOBAL -->
