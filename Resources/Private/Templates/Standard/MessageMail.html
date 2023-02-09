@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:c="http://typo3.org/ns/Cylancer/Participants/ViewHelpers"
+	data-namespace-typo3-fluid="true"
+>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+	<f:layout name="Default" />
+	<f:section name="content">
+		{message -> f:format.html()}    
+		<f:if condition="{receiverGroupListing}">
+			<hr />
+			<strong><f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:</strong>&nbsp;&nbsp;{receiverGroupListing}
+		</f:if>
+		<hr />
+		<strong><f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receivers" />:</strong>&nbsp;&nbsp;{receiverListing}
+		<f:if condition="{footer}">
+			<hr />
+		{footer -> f:format.html()}
+		</f:if>
+	</f:section>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext"
+		original="messages" 
+		product-name="cylancer cySendMails">
+		<header />
+		<body>
+		
+			<!--  GLOBAL -->
+			<trans-unit id="plugin.name">
+				<source>Send a message (form and send function)</source>
+			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>With this plugin the frontend users can send other frontend users a email.</source>
+			</trans-unit>
+		
+		
+			<!--  FLEXFORMS -->
+			<trans-unit id="flexforms_sheet_title.common">
+				<source>Common</source>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.storages">
+				<source>Storages</source>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.formTexts">
+				<source>Form texts</source>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.successTexts">
+				<source>Texts - successful send</source>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.failedTexts">
+				<source>Texts - failed send</source>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.emailTexts">
+				<source>Email texts</source>
+			</trans-unit>
+
+			<trans-unit id="flexforms_setting.saveMessages">
+				<source>Save the messages</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.saveMessages.none">
+				<source>None</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.saveMessages.minimal">
+				<source>Minimal saving</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.saveMessages.full">
+				<source>Full saving</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.senderName">
+				<source>Sender name</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.noReplySenderEmail">
+				<source>Email address for "no reply"</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.subjectPrefix">
+				<source>Subject prefix</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.maxAttachmentsSize">
+				<source>Max attachments size</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.formHeader">
+				<source>Form header text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.formFooter">
+				<source>Form footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.successfulSendHeader">
+				<source>Successful send - header text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.successfulSendFooter">
+				<source>Successful send - footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.failedSendHeader">
+				<source>Error during sending - header text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.failedSendFooter">
+				<source>Error during sending - footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.emailFooter">
+				<source>Email footer text</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.frontendUserStorageUids">
+				<source>Storages of frontend users</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.messagesStorageUid">
+				<source>Storage for delivered messages</source>
+			</trans-unit>
+		
+
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<f:layout name="Default"/>
+<f:section name="content">{messageText} 
+<f:if condition="{receiverGroupListing}">----------------------------------------------------------
+<f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:
+{receiverGroupListing}
+</f:if>
+----------------------------------------------------------
+<f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receivers" />:
+{receiverListing}
+----------------------------------------------------------
+{footerText}
+</f:section>
+</body></html>
+
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="cylancer cySendMails">
+		<header />
+		<body>
+			<trans-unit id="message.email.receiverGroups">
+				<source>Receiver groups</source>
+			</trans-unit>
+			<trans-unit id="message.email.receivers">
+				<source>Receiver</source>
+			</trans-unit>
+			<trans-unit id="message.form.sender">
+				<source>Sender</source>
+			</trans-unit>
+			<trans-unit id="message.form.sendSenderAddress">
+				<source>Send the own email address (Reply to)</source>
+			</trans-unit>
+
+			<trans-unit id="message.form.copyToSender">
+				<source>Send a message copy to me</source>
+			</trans-unit>
+			<trans-unit id="message.form.receiver">
+				<source>Receiver</source>
+			</trans-unit>
+			<trans-unit id="message.form.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="message.form.message">
+				<source>Message</source>
+			</trans-unit>
+			<trans-unit id="message.form.attachments">
+				<source>Attachments</source>
+			</trans-unit>
+
+			<trans-unit id="message.form.button.send">
+				<source>Send</source>
+			</trans-unit>
+			<trans-unit id="message.form.button.reset">
+				<source>Reset</source>
+			</trans-unit>
+
+			<trans-unit id="message.form.error.receivers.messageKeyInvalid">
+				<source>The uniqueness proof is not valid. Check if this message has not already been sent.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.receivers.messageKeyInvalid">
+				<source>The uniqueness proof is not valid. Check if this message has not already been sent.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.receivers.isEmpty">
+				<source>Input a receiver, please.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.receivers.wrongReceivers">
+				<source>The receivers field contains minimum a wrong receiver: %s.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.receivers.wrongReceiverGroups">
+				<source>The receiver field contains minimum a wrong receiver group: %s.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.subject.isEmpty">
+				<source>Input a subject, please.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.message.isEmpty">
+				<source>Input a message, please.</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.attachments.wrongAttachments">
+				<source>The uploaded files are incorrect: %s</source>
+			</trans-unit>
+			<trans-unit id="message.form.error.attachments.tooLarge">
+				<source>The uploaded files are to large. (maximal allowed sum size is %s)</source>
+			</trans-unit>
+
+			<trans-unit id="message.sendSuccessful.subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="message.sendSuccessful.message">
+				<source>Message</source>
+			</trans-unit>
+			<trans-unit id="message.sendSuccessful.attachments">
+				<source>Attachments</source>
+			</trans-unit>
+			<trans-unit id="message.sendSuccessful.receivers">
+				<source>Receiver</source>
+			</trans-unit>
+			<trans-unit id="message.sendSuccessful.receiverGroups">
+				<source>Receiver groups</source>
+			</trans-unit>
+
+			<trans-unit id="message.sender.noReply">
+				<source>No reply</source>
+			</trans-unit>
+
+
+		</body>
+	</file>
+</xliff>

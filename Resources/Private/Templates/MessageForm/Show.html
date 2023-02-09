@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//WC//DTD XHTML . Strict//EN" 	"http://www.w.org/TR/xhtml/DTD/xhtml-strict.dtd">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true" xmlns="http://www.w.org//xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>
+<body>
+	<f:layout name="Default" />
+	<f:section name="content">
+		<div class="">
+			<f:security.ifAuthenticated>
+				<f:then>
+					<f:render section="authenticated" arguments="{_all}" />
+				</f:then>
+				<f:else>
+					<f:render section="nonauthenticated" arguments="{_all}" />
+				</f:else>
+			</f:security.ifAuthenticated>
+		</div>
+	</f:section>
+	<f:section name="authenticated">
+		<f:asset.css identifier="jquery-ui.min.css" href="EXT:cy_send_mails/Resources/Public/Css/jquery-ui.min.css" />
+		<f:asset.css identifier="inputosaurus.css" href="EXT:cy_send_mails/Resources/Public/Css/inputosaurus.css" />
+		<f:asset.css identifier="inputosaurus.custom.css" href="EXT:cy_send_mails/Resources/Public/Css/inputosaurus.custom.css" />
+		<f:asset.css identifier="tx_sendmessage_custom.css" href="EXT:cy_send_mails/Resources/Public/Css/tx_cysendmails_custom.css" />
+		<f:asset.script identifier="jquery-ui.min.js" src="EXT:cy_send_mails/Resources/Public/JavaScript/jquery-ui.min.js" />
+		<f:asset.script identifier="ckeditor.js" src="EXT:cy_send_mails/Resources/Public/JavaScript/ckeditor/ckeditor.js" />
+		<f:asset.script identifier="inputosaurus.js" src="EXT:cy_send_mails/Resources/Public/JavaScript/inputosaurus.js" />
+		<f:asset.script identifier="tx_sendmessage_custom.js" src="EXT:cy_send_mails/Resources/Public/JavaScript/tx_cysendmails_custom.js" defer="true" />
+		<script type="text/javascript">
+			let receivers = [{receivers -> f:format.htmlentitiesDecode()}]; 
+		</script>
+		{header -> f:format.html()}
+		<f:render partial="validationResults" arguments="{prefix:'message.form', validationResults: validationResults}" />
+		<f:form action="send" name="message" method="post" object="{message}" enctype="multipart/form-data">
+			<f:form.hidden property="key" />
+			<label id="senderLabel" class="sendMessageForm" for="sender"><f:translate key="message.form.sender" /></label>
+			<div id="sender">{message.sender.name}</div>
+			<div>
+				<f:form.checkbox id="sendSenderAddress" class="form-check-inline" property="sendSenderAddress" value="sendSenderAddress" />
+				<label id="sendSenderAddressLabel" class="form-check-label" for="sendSenderAddress"><f:translate key="message.form.sendSenderAddress" /></label>
+			</div>
+			<label id="receiversLabel" class="sendMessageForm" for="receipts"><f:translate key="message.form.receiver" /></label>
+			<f:form.textfield id="receivers" class="form-control" property="receivers" />
+			<div>
+				<f:form.checkbox id="copyToSender" class="form-check-inline" property="copyToSender" value="copyToSender" />
+				<label id="copyToSenderLabel" class="form-check-label" for="copyToSender"><f:translate key="message.form.copyToSender" /></label>
+			</div>
+			<label id="subjectLabel" class="sendMessageForm" for="text"><f:translate key="message.form.subject" /></label>
+			<f:form.textfield id="subject" class="form-control" property="subject" />
+			<label id="messageLabel" class="sendMessageForm" for="text"><f:translate key="message.form.message" /></label>
+			<f:form.textarea id="message" class="form-control" property="message" />
+			<label id="attachmentsLabel" class="sendMessageForm" for="text"><f:translate key="message.form.attachments" /></label>
+			<f:form.upload id="attachments" class="form-control" property="attachments" multiple="true" />
+			<br>
+			<f:form.button id="sendButton" class="btn btn-primary btn-lg" type="submit" value="send" formmethod="post">
+				<f:translate key="message.form.button.send" />
+			</f:form.button>
+			&nbsp;&nbsp;
+			<f:form.button id="resetButton" class="btn btn-primary btn-lg" type="reset" value="reset" formmethod="post">
+				<f:translate key="message.form.button.reset" />
+			</f:form.button>
+			<div id="waitMessageContainer"></div>
+		</f:form>
+		{footer -> f:format.html()}
+	</f:section>
+	<f:section name="nonauthenticated">
+		nonauthenticated
+	</f:section>
+</body>
+</html>

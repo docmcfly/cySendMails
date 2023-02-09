@@ -1,0 +1,8 @@
+
+plugin.tx_cysendmails {
+    view {
+       templateRootPath = EXT:cy_send_mails/Resources/Private/Templates/
+       partialRootPath = EXT:cy_send_mails/Resources/Private/Partials/
+       layoutRootPath = EXT:cy_send_mails/Resources/Private/Layouts/
+    }
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext"
+		original="messages" 
+		product-name="cylancer cySendMails">
+		<header />
+		<body>
+			<!--  GLOBAL -->
+			<trans-unit id="tx_send_message.tx_extbase_type">
+				<source>Send message</source>
+				<target state="tanslated">Nachricht senden</target>
+			</trans-unit>
+
+			<!--  MESSAGE  -->
+			<trans-unit id="tx_cysendmails_domain_model_message.title">
+				<source>Message</source>
+				<target state="tanslated">Nachricht</target>
+			</trans-unit>
+			<trans-unit id="tx_cysendmails_domain_model_message.sender">
+				<source>Sender</source>
+				<target state="tanslated">Sender</target>
+			</trans-unit>
+			<trans-unit id="tx_cysendmails_domain_model_message.receivers">
+				<source>Receivers</source>
+				<target state="tanslated">Empfänger</target>
+			</trans-unit>
+			<trans-unit id="tx_cysendmails_domain_model_message.subject">
+				<source>Subject</source>
+				<target state="tanslated">Betreff</target>
+			</trans-unit>
+			<trans-unit id="tx_cysendmails_domain_model_message.message">
+				<source>Message</source>
+				<target state="tanslated">Nachricht</target>
+			</trans-unit>
+			<trans-unit id="tx_cysendmails_domain_model_message.attachmentsMetaData">
+				<source>Meta informations of the attachments</source>
+				<target state="tanslated">Metadaten der Anhänge</target>
+			</trans-unit>
+
+			<!-- FE_GROUP -->
+			<trans-unit id="fe_groups.receiverGroups">
+				<source>Receiver groups</source>
+				<target state="tanslated">Empfängergruppen</target>
+			</trans-unit>
+			<trans-unit id="fe_groups.receiverGroupName">
+				<source>Receiver group name</source>
+				<target state="tanslated">Empfängergruppenname</target>
+			</trans-unit>
+			
+
+		</body>
+	</file>
+</xliff>

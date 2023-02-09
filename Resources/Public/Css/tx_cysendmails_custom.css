@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.error {
+	color: #d31f1f;
+}
+
+label.sendMessageForm {
+	margin-bottom: 0;
+	margin-top: 0.5em;
+	font-weight: bold;
+}
+
+.sendMessage.successfulResult h2 {
+	font-size: 1rem;
+	font-weight: bold;
+	display: inline;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
+.waitMessage {
+	padding-top: 1em;
+	
+}

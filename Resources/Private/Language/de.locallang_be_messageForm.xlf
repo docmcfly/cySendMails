@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext"
+		original="messages" 
+		product-name="cylancer cySendMails">
+		<header />
+		<body>
+		
+			<!--  GLOBAL -->
+			<trans-unit id="plugin.name">
+				<source>Send a message (form and send function)</source>
+				<target state="tanslated">Eine Nachricht senden</target>
+			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>With this plugin the frontend users can send other frontend users a email.</source>
+				<target state="tanslated">Mit diesem Plugin kannn ein Webseitennutzer anderen Webseitennutzer eine E-Mail schreiben.</target>
+			</trans-unit>
+		
+		
+			<!--  FLEXFORMS -->
+			<trans-unit id="flexforms_sheet_title.common">
+				<source>Common</source>
+				<target state="tanslated">Allgemein</target>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.storages">
+				<source>Storages</source>
+				<target state="tanslated">Speicherorte</target>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.formTexts">
+				<source>Form texts</source>
+				<target state="tanslated">Formular-Texte</target>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.successTexts">
+				<source>Texts - successful send</source>
+				<target state="tanslated">Texte - erfolgreich versandt</target>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.failedTexts">
+				<source>Texts - failed send</source>
+				<target state="tanslated">Texte - nicht erfolgreich versandt</target>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.emailTexts">
+				<source>Email texts</source>
+				<target state="tanslated">E-Mail-Texte</target>
+			</trans-unit>
+ 
+			<trans-unit id="flexforms_setting.saveMessages">
+				<source>Save the messages</source>
+				<target state="tanslated">Speichern der Nachrichten</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.saveMessages.none">
+				<source>None</source>
+				<target state="tanslated">keine</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.saveMessages.minimal">
+				<source>Minimal saving</source>
+				<target state="tanslated">Minimale Daten</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.saveMessages.full">
+				<source>Full saving</source>
+				<target state="tanslated">Nachrichten werden vollstänig gespeichert (keine Anhänge)</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.senderName">
+				<source>Sender name</source>
+				<target state="tanslated">Sendername</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.noReplySenderEmail">
+				<source>Email address for "no reply"</source>
+				<target state="tanslated">Nicht-Antworten-E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.subjectPrefix">
+				<source>Subject prefix</source>
+				<target state="tanslated">Betreff-Prefix</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.maxAttachmentsSize">
+				<source>Max attachments size</source>
+				<target state="tanslated">Maximale Größe der Anhänge</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.formHeader">
+				<source>Form header text</source>
+				<target state="tanslated">Eingabeformular-Kopftext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.formFooter">
+				<source>Form footer text</source>
+				<target state="tanslated">Eingabeformular-Fußtext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.successfulSendHeader">
+				<source>Successful send - header text</source>
+				<target state="tanslated">Erfolgreich gesendet - Kopftext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.successfulSendFooter">
+				<source>Successful send - footer text</source>
+				<target state="tanslated">Erfolgreich gesendet - Fußftext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.failedSendHeader">
+				<source>Error during sending - header text</source>
+				<target state="tanslated">Fehlerfall beim Senden - Kopftext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.failedSendFooter">
+				<source>Error during sending - footer text</source>
+				<target state="tanslated">Fehlerfall beim Senden - Fußftext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.emailFooter">
+				<source>Email footer text</source>
+				<target state="tanslated">E-Mail-Fußtext</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.frontendUserStorageUids">
+				<source>Storages of frontend users</source>
+				<target state="tanslated">Speicherort der Webseitennutzer:innen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.messagesStorageUid">
+				<source>Storage for delivered messages</source>
+				<target state="tanslated">Speicherort der zugestellten Nachrichten</target>
+			</trans-unit>
+			
+		
+
+		</body>
+	</file>
+</xliff>
