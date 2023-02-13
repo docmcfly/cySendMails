@@ -8,7 +8,7 @@
 		
 			<!--  GLOBAL -->
 			<trans-unit id="plugin.name">
-				<source>Send a message (form and send function)</source>
+				<source>Send a message</source>
 				<target state="tanslated">Eine Nachricht senden</target>
 			</trans-unit>
 			<trans-unit id="plugin.description">

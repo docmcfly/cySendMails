@@ -3,6 +3,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use Cylancer\CySendMails\Controller\MessageFormController;
+use Cylancer\CySendMails\Upgrades\SendMessagesMigrationWizard;
 /**
  *
  * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
@@ -55,5 +56,7 @@ call_user_func(function () {
     
 });
 
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cynewsletter_sendMessagesMigrationWizard']    = SendMessagesMigrationWizard::class;
+    
 
 

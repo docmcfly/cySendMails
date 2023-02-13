@@ -23,7 +23,7 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '1.0.1',
+    'version' => '1.0.2',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.12-11.5.99',
@@ -34,4 +34,10 @@ to each other. ',
     ]
 ];
 
+/** ---- CHANGELOG ----------
+ 1.0.0 :: Initial
+ 1.0.1 :: Add a migration wizzard
+ 
+ 
+ // ---- CHANGELOG ---------- */
 
