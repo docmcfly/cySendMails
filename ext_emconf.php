@@ -37,7 +37,7 @@ to each other. ',
 /** ---- CHANGELOG ----------
  1.0.0 :: Initial
  1.0.1 :: Add a migration wizzard
- 
+ 1.0.2 :: Update: Bootstrap dependencies to version 13.0.* / add own jQuery lib
  
  // ---- CHANGELOG ---------- */
 

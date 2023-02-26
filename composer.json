@@ -4,7 +4,8 @@
 	"description" : "Send a message form fe users.",
 	"license" : "GPL-2.0-or-later",
 	"require" : {
-		"typo3/cms-core" : "^11.5"
+		"typo3/cms-core" : "^11.5",
+		"bk2k/bootstrap-package" : ">=12.0.0"
 	},
 	"autoload" : {
 		"psr-4" : {
