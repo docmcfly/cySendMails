@@ -27,7 +27,7 @@ to each other. ',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.12-11.5.99',
-            'bootstrap_package' => '11.0.2-12.9.99'
+            'bootstrap_package' => '11.0.2-13.0.99'
         ],
         'conflicts' => [],
         'suggests' => []
@@ -35,9 +35,9 @@ to each other. ',
 ];
 
 /** ---- CHANGELOG ----------
- 1.0.0 :: Initial
+ 1.0.2 :: Update: Bootstrap dependencies to version 13.0.* / add own jQuery lib
  1.0.1 :: Add a migration wizzard
- 
+ 1.0.0 :: Initial
  
  // ---- CHANGELOG ---------- */
 

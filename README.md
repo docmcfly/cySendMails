@@ -4,6 +4,7 @@ This extension is specifically for a manageable group of people. For example a c
 
 ## Limitations
 * They also pay attention mail limitations their web hosters. 
+* This extension is only usable for logged in frontend user. (The admin have to pay that the frontend plugin is only available for logged in users.)
 
 ## Installation
 
