@@ -23,7 +23,7 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '1.0.2',
+    'version' => '1.0.3',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.12-11.5.99',
@@ -35,6 +35,7 @@ to each other. ',
 ];
 
 /** ---- CHANGELOG ----------
+ 1.0.3 :: Fix: translation texts in the email templates
  1.0.2 :: Update: Bootstrap dependencies to version 13.0.* / add own jQuery lib
  1.0.1 :: Add a migration wizzard
  1.0.0 :: Initial
