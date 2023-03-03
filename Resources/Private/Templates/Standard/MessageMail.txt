@@ -6,11 +6,11 @@
 <f:layout name="Default"/>
 <f:section name="content">{messageText} 
 <f:if condition="{receiverGroupListing}">----------------------------------------------------------
-<f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:
+<f:translate key="LLL:EXT:cy_send_mails/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:
 {receiverGroupListing}
 </f:if>
 ----------------------------------------------------------
-<f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receivers" />:
+<f:translate key="LLL:EXT:cy_send_mails/Resources/Private/Language/locallang.xlf:message.email.receivers" />:
 {receiverListing}
 ----------------------------------------------------------
 {footerText}

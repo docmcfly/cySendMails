@@ -10,10 +10,10 @@
 		{message -> f:format.html()}    
 		<f:if condition="{receiverGroupListing}">
 			<hr />
-			<strong><f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:</strong>&nbsp;&nbsp;{receiverGroupListing}
+			<strong><f:translate key="LLL:EXT:cy_send_mails/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:</strong>&nbsp;&nbsp;{receiverGroupListing}
 		</f:if>
 		<hr />
-		<strong><f:translate key="LLL:EXT:send_message/Resources/Private/Language/locallang.xlf:message.email.receivers" />:</strong>&nbsp;&nbsp;{receiverListing}
+		<strong><f:translate key="LLL:EXT:cy_send_mails/Resources/Private/Language/locallang.xlf:message.email.receivers" />:</strong>&nbsp;&nbsp;{receiverListing}
 		<f:if condition="{footer}">
 			<hr />
 		{footer -> f:format.html()}
