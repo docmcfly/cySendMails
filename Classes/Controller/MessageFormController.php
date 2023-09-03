@@ -153,6 +153,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->view->assign('validationResults', $validationResults);
         $this->view->assign('footer', $this->settings['formFooter']);
         $this->view->assign('header', $this->settings['formHeader']);
+
     }
 
     private function getValidReceiverGroup(string $name): ?FrontendUserGroup
@@ -323,7 +324,9 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
             $this->removeSessionMessageKey($message->getKey());
 
-            $successful &= $this->emailSendService->sendTemplateEmail($recipient, $sender, $replyTo, $subject, MessageFormController::MAIL_TEMPLATE, MessageFormController::EXTENSION_NAME, $content, $message->getAttachments());
+            if (!isset($this->settings['simulation']) || $this->settings['simulation'] != 1) {
+                $successful &= $this->emailSendService->sendTemplateEmail($recipient, $sender, $replyTo, $subject, MessageFormController::MAIL_TEMPLATE, MessageFormController::EXTENSION_NAME, $content, $message->getAttachments());
+            }
 
             $attachmentListing = [];
             foreach ($attachments as $attachment) {

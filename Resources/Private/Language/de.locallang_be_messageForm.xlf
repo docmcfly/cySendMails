@@ -42,6 +42,10 @@
 				<source>Email texts</source>
 				<target state="tanslated">E-Mail-Texte</target>
 			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.additional">
+				<source>Additional</source>
+				<target state="tanslated">Sonstiges</target>
+			</trans-unit>
  
 			<trans-unit id="flexforms_setting.saveMessages">
 				<source>Save the messages</source>
@@ -110,6 +114,10 @@
 			<trans-unit id="flexforms_setting.messagesStorageUid">
 				<source>Storage for delivered messages</source>
 				<target state="tanslated">Speicherort der zugestellten Nachrichten</target>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.simulation">
+				<source>Simulation (don't send messages)</source>
+				<target state="tanslated">Simulation (versendet keine Mails)</target>
 			</trans-unit>
 			
 		

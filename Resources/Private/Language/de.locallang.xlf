@@ -103,6 +103,12 @@
 				<source>Receiver groups</source>
 				<target state="tanslated">Empfängergruppen</target>
 			</trans-unit>
+			<trans-unit id="message.sendSuccessful.message.button.back">
+				<source>Back</source>
+				<target state="tanslated">Zurück</target>
+			</trans-unit>
+
+			
 
 			<trans-unit id="message.sender.noReply">
 				<source>No reply</source>

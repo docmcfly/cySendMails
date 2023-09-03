@@ -33,6 +33,9 @@
 			<trans-unit id="flexforms_sheet_title.emailTexts">
 				<source>Email texts</source>
 			</trans-unit>
+			<trans-unit id="flexforms_sheet_title.additional">
+				<source>Additional</source>
+			</trans-unit>
 
 			<trans-unit id="flexforms_setting.saveMessages">
 				<source>Save the messages</source>
@@ -84,6 +87,9 @@
 			</trans-unit>
 			<trans-unit id="flexforms_setting.messagesStorageUid">
 				<source>Storage for delivered messages</source>
+			</trans-unit>
+			<trans-unit id="flexforms_setting.simulation">
+				<source>Simulation (don't send messages)</source>
 			</trans-unit>
 		
 

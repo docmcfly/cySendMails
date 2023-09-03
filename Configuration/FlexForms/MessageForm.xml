@@ -129,7 +129,6 @@
 				</el>
 			</ROOT>
 		</sSTORAGES>
-
 		<sFORMTEXTS>
 			<ROOT>
 				<sheetTitle>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_sheet_title.formTexts</sheetTitle>
@@ -257,5 +256,24 @@
 				</el>
 			</ROOT>
 		</sEMAILTEXTS>
+		<sADDITIONAL>
+			<ROOT>
+				<sheetTitle>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_sheet_title.additional</sheetTitle>
+				<type>array</type>
+				<el>
+					<settings.simulation>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_setting.simulation
+							</label>
+							<config>
+								<type>check</type>
+								<renderType>checkboxToggle</renderType>
+							</config>
+						</TCEforms>
+					</settings.simulation>
+				</el>
+			</ROOT>
+		</sADDITIONAL>
 	</sheets>
 </T3DataStructure>
