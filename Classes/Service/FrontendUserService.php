@@ -8,7 +8,6 @@ use Cylancer\CySendMails\Domain\Model\FrontendUserGroup;
 use Cylancer\CySendMails\Domain\Model\FrontendUser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 
 /**
  *
