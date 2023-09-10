@@ -8,6 +8,7 @@ use Cylancer\CySendMails\Domain\Model\FrontendUserGroup;
 use Cylancer\CySendMails\Domain\Model\FrontendUser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 
 /**
  *
@@ -34,18 +35,6 @@ class FrontendUserService implements SingletonInterface
     {
         $this->frontendUserRepository = $frontendUserRepository;
     }
-
-    /**
-     *
-     * @param array $storagePageIds
-     */
-    public function setStorageUids(array $storagePageIds):void{
-        /** @var QuerySettingsInterface $querySettings */
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setStoragePageIds($storagePageIds);
-        $this->setDefaultQuerySettings($querySettings);
-    }
-    
     
     /**
      *
