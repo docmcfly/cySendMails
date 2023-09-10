@@ -23,7 +23,7 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '1.0.3',
+    'version' => '1.2.0',
     'constraints' => [
         'depends' => [
             'typo3' => '11.5.12-11.5.99',
@@ -35,6 +35,9 @@ to each other. ',
 ];
 
 /** ---- CHANGELOG ----------
+ 1.1.0 :: Fix: Fix the plugin configuration / registry
+ 1.1.0 :: ADD: Add a simulation mode and a back button.
+ 1.0.4 :: Fix: Better handling of unknown receiver ids.
  1.0.3 :: Fix: translation texts in the email templates
  1.0.2 :: Update: Bootstrap dependencies to version 13.0.* / add own jQuery lib
  1.0.1 :: Add a migration wizzard

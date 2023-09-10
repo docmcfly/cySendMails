@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace Cylancer\CySendMails\Controller;
 
 use Cylancer\CySendMails\Domain\Repository\FrontendUserRepository;
@@ -76,9 +76,10 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param FrontendUserGroupRepository $frontendUserGroupRepository
      * @param EmailSendService $emailSendService
      */
-    public function __construct(FrontendUserRepository $frontendUserRepository, MessageRepository $messageRepository, //
-    FrontendUserGroupRepository $frontendUserGroupRepository, EmailSendService $emailSendService)
-    {
+    public function __construct(
+        FrontendUserRepository $frontendUserRepository, MessageRepository $messageRepository, //
+        FrontendUserGroupRepository $frontendUserGroupRepository, EmailSendService $emailSendService
+    ) {
         $this->messageRepository = $messageRepository;
         $this->frontendUserRepository = $frontendUserRepository;
         $this->frontendUserGroupRepository = $frontendUserGroupRepository;
@@ -92,16 +93,19 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->frontendUserService = new FrontendUserService($this->frontendUserRepository);
 
         /** @var FrontendUser $frontendUser  */
-        $this->allowedReceivers = array_filter($this->frontendUserRepository->findAll()->toArray(), //
-        function ($frontendUser) {
-            return ! empty($frontendUser->getEmail());
-        });
+        $this->allowedReceivers = array_filter(
+            $this->frontendUserRepository->findAll()->toArray(),
+            //
+            function ($frontendUser) {
+                return !empty($frontendUser->getEmail());
+            }
+        );
         // debug($this->allowedReceivers);
 
         $tmp = [];
         foreach ($this->frontendUserService->getAllGroups($this->frontendUserService->getCurrentUser()) as $frontendUserGroup) {
             foreach ($frontendUserGroup->getReceiverGroup() as $receiverGroup) {
-                if (! empty($receiverGroup->getReceiverGroupName())) {
+                if (!empty($receiverGroup->getReceiverGroupName())) {
                     $tmp[$receiverGroup->getUid()] = $receiverGroup;
                 }
             }
@@ -123,14 +127,17 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         /** @var FrontendUser $frontendUser  */
         /** @var FrontendUserGroup $frontendUserGroup  */
-        $receivers = array_merge( //
+        $receivers = array_merge(
+            //
 
-        array_map(function ($frontendUser) {
-            return "'" . $frontendUser->getName() . "'";
-        }, $this->allowedReceivers), //
-        array_map(function ($frontendUserGroup) {
-            return ! empty($frontendUserGroup->getReceiverGroupName()) ? ("'" . MessageFormController::GROUP_MARKER . $frontendUserGroup->getReceiverGroupName() . "'") : '';
-        }, $this->allowedReceiverGroups));
+            array_map(function ($frontendUser) {
+                return "'" . $frontendUser->getName() . "'";
+            }, $this->allowedReceivers),
+            //
+            array_map(function ($frontendUserGroup) {
+                return !empty($frontendUserGroup->getReceiverGroupName()) ? ("'" . MessageFormController::GROUP_MARKER . $frontendUserGroup->getReceiverGroupName() . "'") : '';
+            }, $this->allowedReceiverGroups)
+        );
 
         asort($receivers);
 
@@ -146,9 +153,10 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->view->assign('validationResults', $validationResults);
         $this->view->assign('footer', $this->settings['formFooter']);
         $this->view->assign('header', $this->settings['formHeader']);
+
     }
 
-    private function getValidReceiverGroup(String $name): ?FrontendUserGroup
+    private function getValidReceiverGroup(string $name): ?FrontendUserGroup
     {
         /** @var FrontendUserGroup $frontendUserGroup  */
         foreach ($this->allowedReceiverGroups as $frontendUserGroup) {
@@ -159,7 +167,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         return null;
     }
 
-    private function getValidReceiver(String $name): ?FrontendUser
+    private function getValidReceiver(string $name): ?FrontendUser
     {
         /** @var FrontendUser $frontendUser  */
         foreach ($this->allowedReceivers as $frontendUser) {
@@ -186,7 +194,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $wrongReceivers = [];
 
         // collect the receiver, the receiver groups and the excluded receivers
-        
+
         /** @var array $tmp  */
         foreach ($receiversSource as $receiver) {
             $receiver = trim($receiver);
@@ -202,7 +210,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 if ($tmp != null) {
                     $excludedReceivers[$tmp->getUid()] = $tmp;
                 } else {
-                    if (! empty(trim($receiver))) {
+                    if (!empty(trim($receiver))) {
                         $wrongReceivers[] = $receiver;
                     }
                 }
@@ -211,16 +219,16 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 if ($tmp != null) {
                     $receivers[$tmp->getUid()] = $tmp;
                 } else {
-                    if (! empty(trim($receiver))) {
+                    if (!empty(trim($receiver))) {
                         $wrongReceivers[] = $receiver;
                     }
                 }
             }
         }
-       
+
         /** @var ValidationResults $validationResults */
         $validationResults = $this->validate($message, $wrongReceivers, $wrongReceiverGroups);
-        if (! $validationResults->hasErrors()) {
+        if (!$validationResults->hasErrors()) {
 
             /** @var FrontendUserGroup $frontendUserGroup  */
             /** @var FrontendUserGroup $receiverGroup  */
@@ -228,23 +236,25 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             /** @var FrontendUserGroup $frontendUserGroup  */
             foreach ($receiverGroups as $receiverGroup) {
                 foreach ($this->frontendUserRepository->findAll() as $frontendUser) {
-                    if (in_array($receiverGroup->getUid(), array_map(function ($frontendUserGroup) {
-                        return $frontendUserGroup->getUid();
-                    }, $this->frontendUserService->getAllGroups($frontendUser)))) {
-                        $tmp = $receivers[$frontendUser->getUid()];
-                        if ($tmp == null && ! empty($frontendUser->getEmail())) {
+                    if (
+                        in_array(
+                            $receiverGroup->getUid(),
+                            array_map(function ($frontendUserGroup) {
+                                return $frontendUserGroup->getUid();
+                            }, $this->frontendUserService->getAllGroups($frontendUser))
+                        )
+                    ) {
+                        if (!key_exists($frontendUser->getUid(), $receivers) && !empty($frontendUser->getEmail())) {
                             $receivers[$frontendUser->getUid()] = $frontendUser;
                         }
                     }
                 }
             }
-            
             // removes the excluded receivers
             /** @var int $uid */
             foreach (array_keys($excludedReceivers) as $uid) {
                 unset($receivers[$uid]);
             }
-
             /** @var FrontendUser $currentFrontendUser  */
             $currentFrontendUser = $this->frontendUserService->getCurrentUser();
             $message->setSender($currentFrontendUser);
@@ -298,11 +308,11 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
             $replyTo = [];
             if ($message->getSendSenderAddress()) {
-                if (! empty($currentFrontendUser->getEmail())) {
+                if (!empty($currentFrontendUser->getEmail())) {
                     $replyTo[$currentFrontendUser->getEmail()] = $currentFrontendUser->getName();
                 }
             } else {
-                if (! empty($this->settings['noReplySenderEmail'])) {
+                if (!empty($this->settings['noReplySenderEmail'])) {
                     $replyTo[$this->settings['noReplySenderEmail']] = LocalizationUtility::translate('message.sender.noReply', 'CySendMails');
                 }
             }
@@ -314,7 +324,9 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
             $this->removeSessionMessageKey($message->getKey());
 
-            $successful &= $this->emailSendService->sendTemplateEmail($recipient, $sender, $replyTo, $subject, MessageFormController::MAIL_TEMPLATE, MessageFormController::EXTENSION_NAME, $content, $message->getAttachments());
+            if (!isset($this->settings['simulation']) || $this->settings['simulation'] != 1) {
+                $successful &= $this->emailSendService->sendTemplateEmail($recipient, $sender, $replyTo, $subject, MessageFormController::MAIL_TEMPLATE, MessageFormController::EXTENSION_NAME, $content, $message->getAttachments());
+            }
 
             $attachmentListing = [];
             foreach ($attachments as $attachment) {
@@ -345,7 +357,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         /** @var ValidationResults $validationResults */
         $validationResults = new ValidationResults();
-        if (! $this->existsSessionMessageKey($message->getKey())) {
+        if (!$this->existsSessionMessageKey($message->getKey())) {
             $validationResults->addError('receivers.messageKeyInvalid');
         }
         if (strlen(trim($message->getReceivers())) == 0) {
@@ -409,7 +421,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         while ($bytes > 1024) {
             $bytes /= 1024;
-            $i ++;
+            $i++;
         }
         return round($bytes, $precision) . ' ' . $units[$i];
     }
@@ -433,39 +445,39 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         }
     }
 
-    private function createSessionMessageKey(): String
+    private function createSessionMessageKey(): string
     {
         $messageKey = md5(uniqid(strval(rand()), true));
         $this->setSessionMessageKey($messageKey);
         return $messageKey;
     }
 
-    private function existsSessionMessageKey(String $messageKey): bool
+    private function existsSessionMessageKey(string $messageKey): bool
     {
         $userSession = $this->getUserSession();
-        if (! $userSession->hasData()) {
+        if (!$userSession->hasData()) {
             return false;
         }
         $data = $userSession->getData();
-        if (! key_exists(MessageFormController::TX_EXTENSION_NAME, $data)) {
+        if (!key_exists(MessageFormController::TX_EXTENSION_NAME, $data)) {
             return false;
         }
         $messageKeys = $data[MessageFormController::TX_EXTENSION_NAME];
         return key_exists($messageKey, $messageKeys);
     }
 
-    private function removeSessionMessageKey(String $messageKey): void
+    private function removeSessionMessageKey(string $messageKey): void
     {
         $userSession = $this->getUserSession();
-        if (! $userSession->hasData()) {
+        if (!$userSession->hasData()) {
             throw new \Exception('User session data does not exist.');
         }
         $data = $userSession->getData();
-        if (! key_exists(MessageFormController::TX_EXTENSION_NAME, $data)) {
+        if (!key_exists(MessageFormController::TX_EXTENSION_NAME, $data)) {
             throw new \Exception('User session data does not contain message keys.');
         }
         $messageKeys = $data[MessageFormController::TX_EXTENSION_NAME];
-        if (! key_exists($messageKey, $messageKeys)) {
+        if (!key_exists($messageKey, $messageKeys)) {
             throw new \Exception('User session data does not contain the message key: ' . $messageKey);
         }
         unset($messageKeys[$messageKey]);
@@ -474,7 +486,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->updateUserSession($userSession);
     }
 
-    private function setSessionMessageKey(String $messageKey): void
+    private function setSessionMessageKey(string $messageKey): void
     {
         $userSession = $this->getUserSession();
         $data = $userSession->hasData() ? $userSession->getData() : [];

@@ -82,6 +82,9 @@
 			<trans-unit id="message.sendSuccessful.receiverGroups">
 				<source>Receiver groups</source>
 			</trans-unit>
+			<trans-unit id="message.sendSuccessful.message.button.back">
+				<source>Back</source>
+			</trans-unit>
 
 			<trans-unit id="message.sender.noReply">
 				<source>No reply</source>

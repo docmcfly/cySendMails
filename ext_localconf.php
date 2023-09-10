@@ -4,6 +4,7 @@ use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use Cylancer\CySendMails\Controller\MessageFormController;
 use Cylancer\CySendMails\Upgrades\SendMessagesMigrationWizard;
+
 /**
  *
  * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
@@ -19,17 +20,18 @@ defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(function () {
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin( //
-    'Cylancer.CySendMails', //
-    'MessageForm', //
-    [
-        MessageFormController::class => 'show, send'
-    ], 
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'CySendMails',
+        'MessageForm',
+        [
+            MessageFormController::class => 'show, send'
+        ],
         // non-cacheable actions
         [
             MessageFormController::class => 'show, send'
-        ]);
-    
+        ]
+    );
+
     // wizards
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('mod {
             wizards.newContentElement.wizardItems.plugins {
@@ -47,16 +49,13 @@ call_user_func(function () {
                 show = *
             }
        }');
-    
+
     $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon('cysendmails-plugin-messageform', SvgIconProvider::class, [
         'source' => 'EXT:cy_send_mails/Resources/Public/Icons/plugin_messageForm.svg'
     ]);
-    
-    
+
+
 });
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cynewsletter_sendMessagesMigrationWizard']    = SendMessagesMigrationWizard::class;
-    
-
-
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cynewsletter_sendMessagesMigrationWizard'] = SendMessagesMigrationWizard::class;
