@@ -9,7 +9,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Cylancer\\CySendMails\\" : "Classes"
+			"Cylancer\\CySendMails\\" : "Classes/"
 		}
 	},
 	"authors" : [{
