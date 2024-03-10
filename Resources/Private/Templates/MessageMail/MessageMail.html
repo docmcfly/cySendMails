@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-	<f:layout name="Default" />
+	<f:layout name="MessageMail" />
 	<f:section name="content">
-		{message -> f:format.html()}    
+		<f:format.raw>{message}</f:format.raw>
 		<f:if condition="{receiverGroupListing}">
 			<hr />
 			<strong><f:translate key="LLL:EXT:cy_send_mails/Resources/Private/Language/locallang.xlf:message.email.receiverGroups" />:</strong>&nbsp;&nbsp;{receiverGroupListing}
@@ -16,7 +16,7 @@
 		<strong><f:translate key="LLL:EXT:cy_send_mails/Resources/Private/Language/locallang.xlf:message.email.receivers" />:</strong>&nbsp;&nbsp;{receiverListing}
 		<f:if condition="{footer}">
 			<hr />
-		{footer -> f:format.html()}
+			<f:format.raw>{footer}</f:format.raw>
 		</f:if>
 	</f:section>
 </body>

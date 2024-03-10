@@ -7,7 +7,7 @@
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2023 C. Gogolin <service@cylancer.net>
+ * (c) 2024 C. Gogolin <service@cylancer.net>
  *
  */
 $EM_CONF[$_EXTKEY] = [
@@ -23,10 +23,10 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '1.2.0',
+    'version' => '2.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.12-11.5.99',
+            'typo3' => '12.4.0-12.4.99',
             'bootstrap_package' => '11.0.2-13.0.99'
         ],
         'conflicts' => [],
@@ -35,7 +35,10 @@ to each other. ',
 ];
 
 /** ---- CHANGELOG ----------
- 1.1.0 :: Fix: Fix the plugin configuration / registry
+ 
+ 2.0.0 :: UPD: to TYPO3 12.4.x
+ 1.2.1 :: MTN: Extract the session form key handling in a service. 
+ 1.2.0 :: Fix: Fix the plugin configuration / registry
  1.1.0 :: ADD: Add a simulation mode and a back button.
  1.0.4 :: Fix: Better handling of unknown receiver ids.
  1.0.3 :: Fix: translation texts in the email templates

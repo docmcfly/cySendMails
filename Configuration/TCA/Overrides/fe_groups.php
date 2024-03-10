@@ -1,7 +1,7 @@
 <?php
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die('Access denied.');
 
 if (!isset($GLOBALS['TCA']['fe_groups']['ctrl']['type'])) {
     // no type field defined, so we define it here. This will only happen the first time the extension is installed!!

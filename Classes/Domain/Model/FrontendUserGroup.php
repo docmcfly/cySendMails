@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2023 C. Gogolin <service@cylancer.net>
+ * (c) 2024 C. Gogolin <service@cylancer.net>
  *
  * @package Cylancer\CySendMails\Domain\Model
  * 
@@ -92,7 +92,7 @@ class FrontendUserGroup extends AbstractEntity
     /**
      * Returns the receiverGroup
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<FrontendUserGroup> $receiverGroup
+     * @return ObjectStorage<FrontendUserGroup> $receiverGroup
      */
     public function getReceiverGroup()
     {
@@ -102,10 +102,10 @@ class FrontendUserGroup extends AbstractEntity
     /**
      * Sets the receiverGroup
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<FrontendUserGroup> $receiverGroup
+     * @param ObjectStorage<FrontendUserGroup> $receiverGroup
      * @return void
      */
-    public function setReceiverGroup(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $receiverGroup)
+    public function setReceiverGroup(ObjectStorage $receiverGroup)
     {
         $this->receiverGroup = $receiverGroup;
     }

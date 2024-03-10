@@ -1,14 +1,9 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace Cylancer\CySendMails\Upgrades;
 
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use Cylancer\CyNewsletter\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
-use Cylancer\CyNewsletter\Domain\Repository\NewsletterLogRepository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
@@ -76,7 +71,7 @@ final class SendMessagesMigrationWizard implements UpgradeWizardInterface
             ->setMaxResults(1);
         try {
             $sourceStatement = $source->execute();
-            if (! ($row = $sourceStatement->fetch() !== false)) {
+            if (!($row = $sourceStatement->fetch() !== false)) {
                 return false;
             }
         } catch (\Exception $e) {
