@@ -16,7 +16,7 @@ use Cylancer\CySendMails\Upgrades\SendMessagesMigrationWizard;
  *
  */
 
- defined('TYPO3') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(function () {
 
@@ -61,6 +61,6 @@ call_user_func(function () {
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cynewsletter_sendMessagesMigrationWizard'] = SendMessagesMigrationWizard::class;
 
 
-$GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths']['cy_send_mails']    = 'EXT:cy_send_mails/Resources/Private/Templates/MessageMail/';
-$GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths']['cy_send_mails']    = 'EXT:cy_send_mails/Resources/Private/Layouts/MessageMail/';
-$GLOBALS['TYPO3_CONF_VARS']['MAIL']['partialRootPaths']['cy_send_mails']    = 'EXT:cy_send_mails/Resources/Private/Partials/MessageMail/';
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths']['cy_send_mails'] = 'EXT:cy_send_mails/Resources/Private/Templates/MessageMail/';
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths']['cy_send_mails'] = 'EXT:cy_send_mails/Resources/Private/Layouts/MessageMail/';
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['partialRootPaths']['cy_send_mails'] = 'EXT:cy_send_mails/Resources/Private/Partials/MessageMail/';

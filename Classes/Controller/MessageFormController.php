@@ -289,7 +289,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     $minimalMessage->setMessage('-');
                     $minimalMessage->setReceivers($message->getReceivers());
                     $this->messageRepository->add($minimalMessage);
-                    debug($minimalMessage, 'minimalMessage');
+                  //  debug($minimalMessage, 'minimalMessage');
                     break;
                 case 'full':
                     $message->setPid(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID])[0]);
@@ -415,7 +415,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 implode(', ', $wrongReceivers)
             ]);
         }
-        debug($message);
+      //  debug($message);
 
         $attachmentSize = 0;
         foreach ($message->getAttachments() as $attachment) {

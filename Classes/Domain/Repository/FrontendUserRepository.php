@@ -60,16 +60,15 @@ class FrontendUserRepository extends Repository
         $qb = $this->getQueryBuilder('fe_users');
         $qb->select('uid')->from('fe_users');
 
-        $usergroupTerm = array();
         /** @var int $uid */
         foreach ($frontendUserGroupUid as $uid) {
             $qb->orWhere($qb->expr()
                 ->inSet('usergroup', $uid));
         }
 
-        $s = $qb->execute();
+        $s = $qb->executeQuery();
         $return = array();
-        while ($row = $s->fetch()) {
+        while ($row = $s->fetchAssociative()) {
             $return[] = $row['uid'];
         }
         return $return;
