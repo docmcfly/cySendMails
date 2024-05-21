@@ -51,15 +51,13 @@
 			<label id="messageLabel" class="sendMessageForm" for="text"><f:translate key="message.form.message" /></label>
 			<f:form.textarea id="message" class="form-control" property="message" />
 			<label id="attachmentsLabel" class="sendMessageForm" for="text"><f:translate key="message.form.attachments" /></label>
-			<f:form.upload id="attachments" class="form-control" property="attachments" multiple="true" />
+			<f:form.upload id="attachments" class="form-control" property="attachments" name="attachments" multiple="true" />
 			<br>
 			<f:form.button id="sendButton" class="btn btn-primary btn-lg" type="submit" value="send" formmethod="post">
 				<f:translate key="message.form.button.send" />
 			</f:form.button>
 			&nbsp;&nbsp;
-			<f:form.button id="resetButton" class="btn btn-primary btn-lg" type="reset" value="reset" formmethod="post">
-				<f:translate key="message.form.button.reset" />
-			</f:form.button>
+			<a href="?" class="btn btn-primary btn-lg"><f:translate key="message.form.button.reset" /></a>
 			<div id="waitMessageContainer"></div>
 		</f:form>
 		{footer -> f:format.html()}

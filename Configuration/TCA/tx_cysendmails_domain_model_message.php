@@ -132,7 +132,7 @@ return [
             ]
         ],
         'sender' => [
-            'label' => 'LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_db.xlf:tx_cysendmails_domain_model_message.message',
+            'label' => 'LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_db.xlf:tx_cysendmails_domain_model_message.sender',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',

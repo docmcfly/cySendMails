@@ -15,7 +15,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2023 C. Gogolin <service@cylancer.net>
+ * (c) 2024 C. Gogolin <service@cylancer.net>
  *
  * @package Cylancer\CySendMails\Domain\Repository
  */         
@@ -60,16 +60,15 @@ class FrontendUserRepository extends Repository
         $qb = $this->getQueryBuilder('fe_users');
         $qb->select('uid')->from('fe_users');
 
-        $usergroupTerm = array();
         /** @var int $uid */
         foreach ($frontendUserGroupUid as $uid) {
             $qb->orWhere($qb->expr()
                 ->inSet('usergroup', $uid));
         }
 
-        $s = $qb->execute();
+        $s = $qb->executeQuery();
         $return = array();
-        while ($row = $s->fetch()) {
+        while ($row = $s->fetchAssociative()) {
             $return[] = $row['uid'];
         }
         return $return;
