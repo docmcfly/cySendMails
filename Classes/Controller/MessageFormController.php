@@ -265,11 +265,18 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             $currentFrontendUser = $this->frontendUserService->getCurrentUser();
             $message->setSender($currentFrontendUser);
 
-            $message->setAttachmentsMetaData(var_export($message->getAttachments(), true));
-            $attachments = array_filter($message->getAttachments(), function ($v) {
-                return $v['error'] === UPLOAD_ERR_OK;
-            });
-            $message->setAttachments($attachments);
+            $attachmentListing = [];
+
+            if ($message->getAttachments() !== null) {
+                $message->setAttachmentsMetaData(var_export($message->getAttachments(), true));
+                $attachments = array_filter($message->getAttachments(), function ($v) {
+                    return $v['error'] === UPLOAD_ERR_OK;
+                });
+                $message->setAttachments($attachments);
+                foreach ($attachments as $attachment) {
+                    $attachmentListing[] = $attachment['name'];
+                }
+            }
 
             switch ($this->settings['saveMessages']) {
                 case 'none':
@@ -279,11 +286,11 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     $minimalMessage->setPid(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID])[0]);
                     $minimalMessage->setSender($message->getSender());
                     $minimalMessage->setSubject(substr($message->getSubject(), 0, 15));
-                    $minimalMessage->setAttachmentsMetaData('count:' . count($message->getAttachments()));
+                    $minimalMessage->setAttachmentsMetaData('count:' . ($message->getAttachments() != null ? count($message->getAttachments()):0));
                     $minimalMessage->setMessage('-');
                     $minimalMessage->setReceivers($message->getReceivers());
                     $this->messageRepository->add($minimalMessage);
-                  //  debug($minimalMessage, 'minimalMessage');
+                    //  debug($minimalMessage, 'minimalMessage');
                     break;
                 case 'full':
                     $message->setPid(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID])[0]);
@@ -337,11 +344,11 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 if ($replyTo !== null) {
                     $fluidEmail->replyTo($replyTo);
                 }
-
-                foreach ($message->getAttachments() as $attachment) {
-                    $fluidEmail->attachFromPath($attachment['tmp_name'], $attachment['name']);
+                if ($message->getAttachments() !== null) {
+                    foreach ($message->getAttachments() as $attachment) {
+                        $fluidEmail->attachFromPath($attachment['tmp_name'], $attachment['name']);
+                    }
                 }
-
                 foreach ($receivers as $receiver) {
                     $fluidEmail->addBcc(new Address($receiver->getEmail(), $receiver->getFirstName() . ' ' . $receiver->getLastName()));
                 }
@@ -356,10 +363,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 $successful = true;
             }
 
-            $attachmentListing = [];
-            foreach ($attachments as $attachment) {
-                $attachmentListing[] = $attachment['name'];
-            }
+          
 
             $this->view->assign('message', $message);
             $this->view->assign('receivers', $receiverListing);
@@ -409,33 +413,35 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 implode(', ', $wrongReceivers)
             ]);
         }
-      //  debug($message);
+        //  debug($message);
 
         $attachmentSize = 0;
-        foreach ($message->getAttachments() as $attachment) {
-            $attachmentSize += $attachment['size'];
-        }
-
-        if ($attachmentSize > intval($this->settings['maxAttachmentsSize'])) {
-            $validationResults->addError('attachments.tooLarge', [
-                $this->formatBytes(intval($this->settings['maxAttachmentsSize']))
-            ]);
-        }
-
-        $wrongAttachments = array_filter($message->getAttachments(), function ($v) {
-            return $v['error'] != UPLOAD_ERR_OK && $v['error'] != UPLOAD_ERR_NO_FILE;
-        });
-
-        if (count($wrongAttachments) > 0) {
-            $tmp = [];
-            foreach ($wrongAttachments as $wrongAttachment) {
-                $tmp[] = $wrongAttachment['name'];
+        if ($message->getAttachments() !== null) {
+            foreach ($message->getAttachments() as $attachment) {
+                $attachmentSize += $attachment['size'];
             }
-            $validationResults->addError('attachments.wrongAttachments', [
-                implode(', ', $tmp)
-            ]);
-        }
 
+
+            if ($attachmentSize > intval($this->settings['maxAttachmentsSize'])) {
+                $validationResults->addError('attachments.tooLarge', [
+                    $this->formatBytes(intval($this->settings['maxAttachmentsSize']))
+                ]);
+            }
+
+            $wrongAttachments = array_filter($message->getAttachments(), function ($v) {
+                return $v['error'] != UPLOAD_ERR_OK && $v['error'] != UPLOAD_ERR_NO_FILE;
+            });
+
+            if (count($wrongAttachments) > 0) {
+                $tmp = [];
+                foreach ($wrongAttachments as $wrongAttachment) {
+                    $tmp[] = $wrongAttachment['name'];
+                }
+                $validationResults->addError('attachments.wrongAttachments', [
+                    implode(', ', $tmp)
+                ]);
+            }
+        }
         return $validationResults;
     }
 

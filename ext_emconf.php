@@ -23,7 +23,7 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '2.0.1',
+    'version' => '2.0.2',
     'constraints' => [
         'depends' => [
             'typo3' => '12.4.0-12.4.99',
@@ -36,6 +36,7 @@ to each other. ',
 
 /** ---- CHANGELOG ----------
  
+ 2.0.2 :: FIX: You can send emails with and without attachments
  2.0.1 :: FIX: You can send emails with attachments
  2.0.0 :: UPD: to TYPO3 12.4.x
  1.2.1 :: MTN: Extract the session form key handling in a service. 
