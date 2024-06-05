@@ -187,12 +187,6 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function sendAction(Message $message)
     {
 
-        if ($this->request->hasArgument('attachments')) {
-            $message->setAttachments($this->request->getArgument('attachments'));
-        } else {
-            $message->setAttachments([]);
-        }
-
         /** @var FrontendUser $frontendUser  */
         /** @var FrontendUserGroup $frontendUserGroup  */
 
