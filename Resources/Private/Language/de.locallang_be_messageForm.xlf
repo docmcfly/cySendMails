@@ -63,9 +63,9 @@
 				<source>Full saving</source>
 				<target state="tanslated">Nachrichten werden vollstänig gespeichert (keine Anhänge)</target>
 			</trans-unit>
-			<trans-unit id="flexforms_setting.senderName">
-				<source>Sender name</source>
-				<target state="tanslated">Sendername</target>
+			<trans-unit id="flexforms_setting.senderNameSuffix">
+				<source>Sender name suffix</source>
+				<target state="tanslated">Sendernamensuffix</target>
 			</trans-unit>
 			<trans-unit id="flexforms_setting.noReplySenderEmail">
 				<source>Email address for "no reply"</source>
