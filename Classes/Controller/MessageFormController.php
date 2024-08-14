@@ -298,7 +298,13 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     break;
             }
 
-            $sender = new Address(MailUtility::getSystemFromAddress(), $message->getSender()->getName());
+            $senderNameSuffix = isset($this->settings['senderNameSuffix']) ?  $this->settings['senderNameSuffix'] : '';
+            $senderName = $message->getSender()->getName();
+            if($senderNameSuffix != null && strlen(trim($senderNameSuffix)) > 0 ){
+                $senderName .= ' ('.$senderNameSuffix.')'; 
+            }
+
+            $sender = new Address(MailUtility::getSystemFromAddress(), $senderName);
 
             if ($message->getCopyToSender()) {
                 $receivers[$currentFrontendUser->getUid()] = $currentFrontendUser;

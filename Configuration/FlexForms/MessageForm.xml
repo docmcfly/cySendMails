@@ -34,17 +34,17 @@
 							</config>
 						</TCEforms>
 					</settings.saveMessages>
-					<settings.senderName>
+					<settings.senderNameSuffix>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_setting.senderName
+							<label>LLL:EXT:cy_send_mails/Resources/Private/Language/locallang_be_messageForm.xlf:flexforms_setting.senderNameSuffix
 							</label>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
 							</config>
 						</TCEforms>
-					</settings.senderName>
+					</settings.senderNameSuffix>
 					<settings.noReplySenderEmail>
 						<TCEforms>
 							<exclude>1</exclude>
