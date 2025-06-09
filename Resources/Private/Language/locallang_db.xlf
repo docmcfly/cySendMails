@@ -29,6 +29,9 @@
 			</trans-unit>
 			
 			<!-- FE_GROUP -->
+			<trans-unit id="fe_groups.tabSettings">
+				<source>"Send a message" settings</source>
+			</trans-unit>
 			<trans-unit id="fe_groups.receiverGroups">
 				<source>Receiver groups</source>
 			</trans-unit>

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace Cylancer\CySendMails\Domain\Model;
 
 /**
@@ -9,104 +9,58 @@ namespace Cylancer\CySendMails\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2024 C. Gogolin <service@cylancer.net>
- *
- * @package Cylancer\CySendMails\Domain\Model
+ * (c) 2025 C. Gogolin <service@cylancer.net>
  *         
  */
 class ValidationResults
 {
 
-    /**
-     *
-     * @var array
-     */
-    protected $infos = array();
+    protected array $infos = [];
 
-    /**
-     *
-     * @var array
-     */
-    protected $errors = array();
+    protected array $errors = [];
 
-    /**
-     *
-     * @return array of srings
-     */
-    public function getInfos()
+    public function getInfos(): array
     {
         return $this->infos;
     }
 
-    /**
-     *
-     * @return array of srings
-     */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
 
-    /**
-     *
-     * @return array of srings
-     */
-    public function hasErrors()
+    public function hasErrors(): bool
     {
-        return ! empty($this->errors);
+        return !empty($this->errors);
     }
 
-    /**
-     *
-     * @return array of srings
-     */
-    public function hasInfos()
+    public function hasInfos(): bool
     {
-        return ! empty($this->infos);
+        return !empty($this->infos);
     }
 
-    /**
-     *
-     * @param String $errorKey
-     * @param array $arguments
-     */
-    public function addInfo(String $infoKey, array $arguments = []): void
+    public function addInfo(string $infoKey, array $arguments = []): void
     {
         $keySplit = explode('.', $infoKey, 2);
-        $this->infos['info.' . $infoKey]['arguments'] = $arguments;
-        $this->infos['info.' . $infoKey]['id'] = count($keySplit) == 2 ? $keySplit[0] : $infoKey;
+        $this->infos["info.$infoKey"]['arguments'] = $arguments;
+        $this->infos["info.$infoKey"]['id'] = count($keySplit) == 2 ? $keySplit[0] : $infoKey;
     }
 
-    /**
-     *
-     * @param String $errorKey
-     * @param array $arguments
-     */
-    public function addError(String $errorKey, array $arguments = []): void
+    public function addError(string $errorKey, array $arguments = []): void
     {
         $keySplit = explode('.', $errorKey, 2);
-        $this->errors['error.' . $errorKey]['arguments'] = $arguments;
-        $this->errors['error.' . $errorKey]['id'] = count($keySplit) == 2 ? $keySplit[0] : $errorKey;
+        $this->errors["error.$errorKey"]['arguments'] = $arguments;
+        $this->errors["error.$errorKey"]['id'] = count($keySplit) == 2 ? $keySplit[0] : $errorKey;
     }
 
-    /**
-     *
-     * @param
-     *            array
-     */
-    public function addInfos(array $infos)
+    public function addInfos(array $infos): void
     {
         foreach ($infos as $info) {
             $this->addInfo($info);
         }
     }
 
-    /**
-     *
-     * @param
-     *            array
-     */
-    public function addErrors(array $errors)
+    public function addErrors(array $errors): void
     {
         foreach ($errors as $error) {
             $this->addError($error);

@@ -7,6 +7,18 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
+/**
+ *
+ * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * (c) 2025 C. Gogolin <service@cylancer.net>
+ *
+ *         
+ */
+
 final class SendMessagesMigrationWizard implements UpgradeWizardInterface
 {
 
@@ -37,13 +49,13 @@ final class SendMessagesMigrationWizard implements UpgradeWizardInterface
         $source = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_sendmessage_fegroups_receivergroup_mm');
         $source->select('uid_local', 'uid_foreign', 'sorting', 'sorting_foreign')->from('tx_sendmessage_fegroups_receivergroup_mm');
 
-        $sourceStatement = $source->execute();
+        $sourceStatement = $source->executeQuery();
 
         /** @var QueryBuilder $target */
         $target = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_cysendmails_fegroups_receivergroup_mm');
         $target->insert('tx_cysendmails_fegroups_receivergroup_mm');
 
-        while ($row = $sourceStatement->fetch()) {
+        while ($row = $sourceStatement->fetchAllAssociative()) {
             $target->values([
                 'uid_local' => $row['uid_local'],
                 'uid_foreign' => $row['uid_foreign'],
@@ -70,8 +82,8 @@ final class SendMessagesMigrationWizard implements UpgradeWizardInterface
             ->from('tx_sendmessage_fegroups_receivergroup_mm')
             ->setMaxResults(1);
         try {
-            $sourceStatement = $source->execute();
-            if (!($row = $sourceStatement->fetch() !== false)) {
+            $sourceStatement = $source->executeQuery();
+            if (!($row = $sourceStatement->fetchOne() !== false)) {
                 return false;
             }
         } catch (\Exception $e) {
@@ -83,8 +95,8 @@ final class SendMessagesMigrationWizard implements UpgradeWizardInterface
             ->from('tx_cysendmails_fegroups_receivergroup_mm')
             ->setMaxResults(1);
 
-        $targetStatement = $target->execute();
-        if ($row = $targetStatement->fetch() === false) {
+        $targetStatement = $target->executeQuery();
+        if ($row = $targetStatement->fetchOne() === false) {
             return true;
         }
 
@@ -101,7 +113,7 @@ final class SendMessagesMigrationWizard implements UpgradeWizardInterface
      */
     public function getPrerequisites(): array
     {
-        // Add your logic here
+        return []; // Add your logic here
     }
 
     public function getIdentifier(): string

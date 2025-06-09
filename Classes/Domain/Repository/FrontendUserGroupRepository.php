@@ -12,7 +12,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  *
  * (c) 2024 C. Gogolin <service@cylancer.net>
  *
- * @package Cylancer\CySendMails\Domain\Repository
  *         
  */
 class FrontendUserGroupRepository extends Repository

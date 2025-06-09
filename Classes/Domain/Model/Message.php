@@ -1,9 +1,11 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace Cylancer\CySendMails\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
- 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+
 /**
  *
  * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
@@ -11,232 +13,127 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2024 C. Gogolin <service@cylancer.net>
+ * (c) 2025 C. Gogolin <service@cylancer.net>
  *
- * @package Cylancer\CySendMails\Domain\Model
  * 
  */
 class Message extends AbstractEntity
 {
 
-    /**
-     *
-     * @var boolean
-     */
-    protected $sendSenderAddress = true;
+    protected bool $sendSenderAddress = true;
 
-    /**
-     *
-     * @var boolean
-     */
-    protected $copyToSender = true;
+    protected bool $copyToSender = true;
 
-    /**
-     *
-     * @var FrontendUser
-     */
-    protected $sender = null;
+    protected ?FrontendUser $sender = null;
 
-    /**
-     *
-     * @var string
-     */
-    protected $receivers = '';
+    protected ?string $receivers = '';
 
-    /**
-     *
-     * @var string
-     */
-    protected $subject = '';
+    protected ?string $subject = '';
 
-    /**
-     *
-     * @var string
-     */
-    protected $message = '';
+    protected ?string $message = '';
 
-    /**
-     *
-     * @var array
-     */
-    protected $attachments = null;
+    /** @var ObjectStorage<FileReference> */
+    protected ObjectStorage $attachments;
 
-    /**
-     *
-     * @var string
-     */
-    protected $attachmentsMetaData = null;
+    protected ?string $attachmentsMetaData = null;
 
-    /**
-     *
-     * @var string
-     */
-    protected $key = null;
+    protected ?string $key = null;
 
-    /**
-     *
-     * @return boolean
-     */
+    public function __construct()
+    {
+        $this->attachments = new ObjectStorage();
+    }
+
+    public function initializeObject(): void
+    {
+        $this->attachments = $this->attachments ?? new ObjectStorage();
+    }
+
     public function getSendSenderAddress(): bool
     {
         return $this->sendSenderAddress;
     }
 
-    /**
-     *
-     * @param boolean $sendSenderAddress
-     * @return void
-     */
     public function setSendSenderAddress(bool $sendSenderAddress): void
     {
         $this->sendSenderAddress = $sendSenderAddress;
     }
 
-    /**
-     *
-     * @return boolean
-     */
     public function getCopyToSender(): bool
     {
         return $this->copyToSender;
     }
 
-    /**
-     *
-     * @param boolean $copyToSender
-     * @return void
-     */
     public function setCopyToSender(bool $copyToSender): void
     {
         $this->copyToSender = $copyToSender;
     }
 
-    /**
-     *
-     * @return FrontendUser
-     */
     public function getSender(): ?FrontendUser
     {
         return $this->sender;
     }
 
-    /**
-     *
-     * @param FrontendUser $sender
-     * @return void
-     */
-    public function setSender(FrontendUser $sender): void
+    public function setSender(?FrontendUser $sender): void
     {
         $this->sender = $sender;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getReceivers(): String
+    public function getReceivers(): ?string
     {
         return $this->receivers;
     }
 
-    /**
-     *
-     * @param string $receivers
-     * @return void
-     */
-    public function setReceivers(String $receivers): void
+    public function setReceivers(?string $receivers): void
     {
         $this->receivers = $receivers;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getSubject(): String
+    public function getSubject(): ?string
     {
         return $this->subject;
     }
 
-    /**
-     *
-     * @param string $subject
-     * @return void
-     */
-    public function setSubject(String $subject)
+    public function setSubject(?string $subject)
     {
         $this->subject = $subject;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getMessage(): String
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
-    /**
-     *
-     * @param string $message
-     * @return void
-     */
-    public function setMessage(String $message): void
+    public function setMessage(?string $message): void
     {
         $this->message = $message;
     }
 
-    /**
-     *
-     * @return array
-     */
-    public function getAttachments(): ?array
+    public function getAttachments(): ObjectStorage
     {
         return $this->attachments;
     }
 
-    /**
-     *
-     * @param array $attachments
-     */
-    public function setAttachments(array $attachments): void
+    public function setAttachments(ObjectStorage $attachments): void
     {
         $this->attachments = $attachments;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getAttachmentsMetaData(): string
+    public function getAttachmentsMetaData(): ?string
     {
         return $this->attachmentsMetaData;
     }
 
-    /**
-     *
-     * @param string $attachmentsMetaData
-     */
-    public function setAttachmentsMetaData($attachmentsMetaData): void
+    public function setAttachmentsMetaData(?string $attachmentsMetaData): void
     {
         $this->attachmentsMetaData = $attachmentsMetaData;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getKey(): ?String
+    public function getKey(): ?string
     {
         return $this->key;
     }
 
-    /**
-     *
-     * @param string $key
-     * @return void
-     */
     public function setKey($key): void
     {
         $this->key = $key;
