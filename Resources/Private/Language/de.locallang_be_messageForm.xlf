@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext"
-		original="messages" 
-		product-name="cylancer cySendMails">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="cylancer cySendMails">
 		<header />
 		<body>
-		
+
 			<!--  GLOBAL -->
 			<trans-unit id="plugin.name">
 				<source>Send a message</source>
 				<target state="tanslated">Eine Nachricht senden</target>
 			</trans-unit>
 			<trans-unit id="plugin.description">
-				<source>With this plugin the frontend users can send other frontend users a email.</source>
+				<source>With this plugin the frontend users can send other frontend users an email.</source>
 				<target state="tanslated">Mit diesem Plugin kannn ein Webseitennutzer anderen Webseitennutzer eine E-Mail schreiben.</target>
 			</trans-unit>
-		
-		
+
+
 			<!--  FLEXFORMS -->
+			<trans-unit id="flexforms_general.title">
+				<source>Settings</source>
+				<target state="tanslated">Einstellungen</target>
+			</trans-unit>
 			<trans-unit id="flexforms_sheet_title.common">
 				<source>Common</source>
 				<target state="tanslated">Allgemein</target>
@@ -46,7 +48,7 @@
 				<source>Additional</source>
 				<target state="tanslated">Sonstiges</target>
 			</trans-unit>
- 
+
 			<trans-unit id="flexforms_setting.saveMessages">
 				<source>Save the messages</source>
 				<target state="tanslated">Speichern der Nachrichten</target>
@@ -119,8 +121,8 @@
 				<source>Simulation (don't send messages)</source>
 				<target state="tanslated">Simulation (versendet keine Mails)</target>
 			</trans-unit>
-			
-		
+
+
 
 		</body>
 	</file>

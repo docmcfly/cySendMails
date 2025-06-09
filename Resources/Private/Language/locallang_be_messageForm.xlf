@@ -1,20 +1,21 @@
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext"
-		original="messages" 
-		product-name="cylancer cySendMails">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="cylancer cySendMails">
 		<header />
 		<body>
-		
+
 			<!--  GLOBAL -->
 			<trans-unit id="plugin.name">
 				<source>Send a message (form and send function)</source>
 			</trans-unit>
 			<trans-unit id="plugin.description">
-				<source>With this plugin the frontend users can send other frontend users a email.</source>
+				<source>With this plugin the frontend users can send other frontend users an email.</source>
 			</trans-unit>
-		
-		
+
+
 			<!--  FLEXFORMS -->
+			<trans-unit id="flexforms_general.title">
+				<source>Settings</source>
+			</trans-unit>
 			<trans-unit id="flexforms_sheet_title.common">
 				<source>Common</source>
 			</trans-unit>
@@ -91,7 +92,7 @@
 			<trans-unit id="flexforms_setting.simulation">
 				<source>Simulation (don't send messages)</source>
 			</trans-unit>
-		
+
 
 		</body>
 	</file>

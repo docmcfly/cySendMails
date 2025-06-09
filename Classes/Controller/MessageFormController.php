@@ -19,7 +19,8 @@ use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
+use TYPO3\CMS\Extbase\Mvc\Controller\FileUploadConfiguration;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 /**
  *
  * This file is part of the "cy_send_mails" Extension for TYPO3 CMS.
@@ -27,72 +28,45 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2024 C. Gogolin <service@cylancer.net>
+ * (c) 2025 C. Gogolin <service@cylancer.net>
  *
- * @package Cylancer\CySendMails\Controller
  */
+
 class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
-    const EXTENSION_NAME = 'CySendMails';
+    private const EXTENSION_NAME = 'CySendMails';
 
-    const TX_EXTENSION_NAME = 'tx_cy_send_mails';
+    public const TX_EXTENSION_NAME = 'tx_cy_send_mails';
 
-    const MAIL_TEMPLATE = 'MessageMail';
+    private const MAIL_TEMPLATE = 'MessageMail';
 
-    const FRONTEND_USER_STORAGE_UIDS = 'frontendUserStorageUids';
+    private const FRONTEND_USER_STORAGE_UIDS = 'frontendUserStorageUids';
 
-    const MESSAGES_STORAGE_UID = 'messagesStorageUid';
+    private const MESSAGES_STORAGE_UID = 'messagesStorageUid';
 
-    const GROUP_MARKER = '#';
+    private const GROUP_MARKER = '#';
 
-    const EXCLUDE_MARKER = '- ';
+    private const EXCLUDE_MARKER = '- ';
 
-    const VALIDATION_RESULTS_KEY = 'validationResults';
+    private const VALIDATION_RESULTS_KEY = 'validationResults';
 
-    const MESSAGE_KEY = 'message';
+    private const MESSAGE_KEY = 'message';
+    private array $allowedReceivers;
 
-    /** @var MessageRepository   */
-    private $messageRepository;
+    private array $allowedReceiverGroups;
 
-    /** @var FrontendUserRepository  */
-    private $frontendUserRepository;
+    private FrontendUserService $frontendUserService;
 
-    /** @var FrontendUserGroupRepository     */
-    private $frontendUserGroupRepository;
-
-    /** @var FrontendUserService      */
-    private $frontendUserService;
-
-    /** @var FormSessionKeyHandlerService */
-    private $formSessionKeyHandlerService;
-
-    /** @var array */
-    private $allowedReceivers;
-
-    /** @var array */
-    private $allowedReceiverGroups;
-
-    /**
-     *
-     * @param FrontendUserRepository $frontendUserRepository
-     * @param MessageRepository $messageRepository
-     * @param FrontendUserGroupRepository $frontendUserGroupRepository
-     * @param FormSessionKeyHandlerService $formSessionKeyHandlerService
-     */
     public function __construct(
-        FrontendUserRepository $frontendUserRepository,
-        MessageRepository $messageRepository,
-        FrontendUserGroupRepository $frontendUserGroupRepository,
-        FormSessionKeyHandlerService $formSessionKeyHandlerService
+        private readonly FrontendUserRepository $frontendUserRepository,
+        private readonly MessageRepository $messageRepository,
+        private readonly FrontendUserGroupRepository $frontendUserGroupRepository,
+        private readonly FormSessionKeyHandlerService $formSessionKeyHandlerService
     ) {
-        $this->messageRepository = $messageRepository;
-        $this->frontendUserRepository = $frontendUserRepository;
-        $this->frontendUserGroupRepository = $frontendUserGroupRepository;
-        $this->formSessionKeyHandlerService = $formSessionKeyHandlerService;
     }
 
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         $this->frontendUserRepository->setStorageUids(GeneralUtility::intExplode(',', $this->settings[MessageFormController::FRONTEND_USER_STORAGE_UIDS]));
         $this->messageRepository->setStorageUids(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID]));
@@ -105,7 +79,6 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 return !empty($frontendUser->getEmail());
             }
         );
-        // debug($this->allowedReceivers);
 
         $tmp = [];
         foreach ($this->frontendUserService->getAllGroups($this->frontendUserService->getCurrentUser()) as $frontendUserGroup) {
@@ -118,6 +91,7 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->allowedReceiverGroups = array_values($tmp);
         // debug($this->allowedReceiverGroups);
     }
+
 
     public function showAction(): ResponseInterface
     {
@@ -183,8 +157,19 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         }
         return null;
     }
+    public function initializeSendAction(): void
+    {
 
-    public function sendAction(Message $message)
+        $message = $this->arguments->getArgument('message');
+        $fileHandlingServiceConfiguration = $message->getFileHandlingServiceConfiguration();
+        $uploadConfiguration = (new FileUploadConfiguration('attachments'))
+            ->setUploadFolder('1:/_temp_/attachments');
+        //  $uploadConfiguration->setDuplicationBehavior(DuplicationBehavior::RENAME);
+        $fileHandlingServiceConfiguration->addFileUploadConfiguration($uploadConfiguration);
+        $message->getPropertyMappingConfiguration()->skipProperties('attachments');
+    }
+
+    public function sendAction(Message $message): ForwardResponse|ResponseInterface
     {
 
         /** @var FrontendUser $frontendUser  */
@@ -265,19 +250,16 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             $currentFrontendUser = $this->frontendUserService->getCurrentUser();
             $message->setSender($currentFrontendUser);
 
+            /** @var FileReference  $attachment */
             $attachmentListing = [];
-
-            if ($message->getAttachments() !== null) {
-                $message->setAttachmentsMetaData(var_export($message->getAttachments(), true));
-                $attachments = array_filter($message->getAttachments(), function ($v) {
-                    return $v['error'] === UPLOAD_ERR_OK;
-                });
-                $message->setAttachments($attachments);
-                foreach ($attachments as $attachment) {
-                    $attachmentListing[] = $attachment['name'];
+            if ($message->getAttachments() !== null && $message->getAttachments()->count() > 0) {
+                foreach ($message->getAttachments() as $attachment) {
+                    $file = $attachment->getOriginalResource()->getOriginalFile();
+                    $attachmentListing[] = $file->getName() . " (" . $this->formatBytes($file->getSize()) . ")";
                 }
             }
-
+            /** @var   Message $storedMessage   */
+            $storedMessage = null;
             switch ($this->settings['saveMessages']) {
                 case 'none':
                     break;
@@ -286,22 +268,24 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     $minimalMessage->setPid(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID])[0]);
                     $minimalMessage->setSender($message->getSender());
                     $minimalMessage->setSubject(substr($message->getSubject(), 0, 15));
-                    $minimalMessage->setAttachmentsMetaData('count:' . ($message->getAttachments() != null ? count($message->getAttachments()):0));
+                    $minimalMessage->setAttachmentsMetaData('count:' . ($message->getAttachments()->count()));
                     $minimalMessage->setMessage('-');
                     $minimalMessage->setReceivers($message->getReceivers());
+                    $storedMessage = $minimalMessage;
                     $this->messageRepository->add($minimalMessage);
-                    //  debug($minimalMessage, 'minimalMessage');
                     break;
                 case 'full':
                     $message->setPid(GeneralUtility::intExplode(',', $this->settings[MessageFormController::MESSAGES_STORAGE_UID])[0]);
-                    $this->messageRepository->add($message);
+                    $message->setAttachmentsMetaData(implode("\n", $attachmentListing, ));
+                    $storedMessage = $message;
+
                     break;
             }
 
-            $senderNameSuffix = isset($this->settings['senderNameSuffix']) ?  $this->settings['senderNameSuffix'] : '';
+            $senderNameSuffix = isset($this->settings['senderNameSuffix']) ? $this->settings['senderNameSuffix'] : '';
             $senderName = $message->getSender()->getName();
-            if($senderNameSuffix != null && strlen(trim($senderNameSuffix)) > 0 ){
-                $senderName .= ' ('.$senderNameSuffix.')'; 
+            if ($senderNameSuffix != null && strlen(trim($senderNameSuffix)) > 0) {
+                $senderName .= ' (' . $senderNameSuffix . ')';
             }
 
             $sender = new Address(MailUtility::getSystemFromAddress(), $senderName);
@@ -350,11 +334,15 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 if ($replyTo !== null) {
                     $fluidEmail->replyTo($replyTo);
                 }
-                if ($message->getAttachments() !== null) {
+                if ($message->getAttachments()->count() > 0) {
+                    /** @var FileReference  $attachment */
                     foreach ($message->getAttachments() as $attachment) {
-                        $fluidEmail->attachFromPath($attachment['tmp_name'], $attachment['name']);
+                        $file = $attachment->getOriginalResource()->getOriginalFile();
+                        $fluidEmail->attachFromPath($file->getForLocalProcessing(false), $file->getName());
                     }
                 }
+
+
                 foreach ($receivers as $receiver) {
                     $fluidEmail->addBcc(new Address($receiver->getEmail(), $receiver->getFirstName() . ' ' . $receiver->getLastName()));
                 }
@@ -363,14 +351,24 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     GeneralUtility::makeInstance(MailerInterface::class)->send($fluidEmail);
                     $successful = true;
                 } catch (\Exception $e) {
+                    debug($e);
                     $successful = false;
                 }
             } else {
                 $successful = true;
             }
+            if ($storedMessage != null) {
+                if ($storedMessage->getAttachments()->count() > 0) {
 
-          
-
+                    /** @var FileReference  $attachment */
+                    foreach ($storedMessage->getAttachments() as $attachment) {
+                        $file = $attachment->getOriginalResource()->getOriginalFile();
+                        $storedMessage->getAttachments()->detach($attachment);
+                        $file->delete();
+                    }
+                }
+                $this->messageRepository->add($storedMessage);
+            }
             $this->view->assign('message', $message);
             $this->view->assign('receivers', $receiverListing);
             $this->view->assign('receiverGroups', $receiverGroupListing);
@@ -419,12 +417,12 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 implode(', ', $wrongReceivers)
             ]);
         }
-        //  debug($message);
 
         $attachmentSize = 0;
-        if ($message->getAttachments() !== null) {
+        if ($message->getAttachments() !== null && $message->getAttachments()->count() > 0) {
+            /** @var \TYPO3\CMS\Extbase\Domain\Model\FileReference $attachment */
             foreach ($message->getAttachments() as $attachment) {
-                $attachmentSize += $attachment['size'];
+                $attachmentSize += $attachment->getOriginalResource()->getOriginalFile()->getSize();
             }
 
 
@@ -434,24 +432,11 @@ class MessageFormController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                 ]);
             }
 
-            $wrongAttachments = array_filter($message->getAttachments(), function ($v) {
-                return $v['error'] != UPLOAD_ERR_OK && $v['error'] != UPLOAD_ERR_NO_FILE;
-            });
-
-            if (count($wrongAttachments) > 0) {
-                $tmp = [];
-                foreach ($wrongAttachments as $wrongAttachment) {
-                    $tmp[] = $wrongAttachment['name'];
-                }
-                $validationResults->addError('attachments.wrongAttachments', [
-                    implode(', ', $tmp)
-                ]);
-            }
         }
         return $validationResults;
     }
 
-    private function formatBytes($bytes, $precision = 2)
+    private function formatBytes($bytes, $precision = 2): string
     {
         $units = [
             'Byte',

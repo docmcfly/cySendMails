@@ -38,6 +38,10 @@
 			</trans-unit>
 
 			<!-- FE_GROUP -->
+			<trans-unit id="fe_groups.tabSettings">
+				<source>"Send a message" settings</source>
+				<target state="tanslated">"Eine Nachricht senden"-Einstellungen</target>
+			</trans-unit>
 			<trans-unit id="fe_groups.receiverGroups">
 				<source>Receiver groups</source>
 				<target state="tanslated">Empfängergruppen</target>

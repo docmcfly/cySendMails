@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="cylancer cySendMails">
+		<header />
+		<body>
+
+			<!-- Plugin group -->
+			<trans-unit id="plugins.group.cySendMails.name">
+				<source>Send emails other frontend users</source>
+				<target state="tanslated">Anderen Nutzern E-Mails senden</target>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>
