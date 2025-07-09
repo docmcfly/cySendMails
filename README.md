@@ -5,6 +5,7 @@ This extension is specifically for a manageable group of people. For example a c
 
 ## Change log
 
+* 3.0.2 :: UPD: Add comment marker in the mail. 
 * 3.0.1 :: UPD: Update (cleaning) TCA configuration
 * 3.0.0 :: UPD: to TYPO3 13.4.x
 * 2.1.0 :: ADD: You can add a suffix to the sender name. 

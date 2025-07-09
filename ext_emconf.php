@@ -25,7 +25,7 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '3.0.1',
+    'version' => '3.0.2',
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-13.4.99',
