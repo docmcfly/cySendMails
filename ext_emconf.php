@@ -25,11 +25,11 @@ to each other. ',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '3.0.1',
+    'version' => '3.1.0',
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-13.4.99',
-            'bootstrap_package' => '15.0.0-15.0.99'
+            'bootstrap_package' => '15.0.0-16.0.99'
         ],
         'conflicts' => [],
         'suggests' => []
