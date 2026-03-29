@@ -5,6 +5,7 @@ This extension is specifically for a manageable group of people. For example a c
 
 ## Change log
 
+* 3.1.1 :: FIX: Fix the depends version syntax.
 * 3.1.0 :: UPD: Release the bootsrap version 16
 * 3.0.2 :: UPD: Add comment marker in the mail.
 * 3.0.1 :: UPD: Update (cleaning) TCA configuration
